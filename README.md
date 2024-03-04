@@ -1,15 +1,13 @@
 # ecommerce
 
-
-## Clonar el Repositorio
-
-Primero, clona este repositorio en tu máquina local:
+## Clone the Repository
+First, clone this repository to your local machine:
 
 ```bash
 git clone https://github.com/JuanJmf01/ecommerce.git
 ```
 
-## Instalación del Entorno Virtual
+## Installation of the Virtual Environment
 
 To isolate the dependencies of this project, it is recommended to use a virtual environment. Follow these steps:
 1. Install `virtualenv` if you don't have it already:
@@ -42,8 +40,40 @@ Install Django and other dependencies necessary for your project:
 
 ```bash
 pip install django
+pip install mysqlclient
 pip install djangorestframework  # Install "Django Rest Framework"
 pip install django-cors-headers  # Install middleware for CORS
+```
+
+## 3. Update configuration to work with MySQL
+
+In settings.py make the following modifications. Make sure to replace the values
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'nombre_de_tu_base_de_datos',
+        'USER': 'tu_usuario_de_mysql',
+        'PASSWORD': 'tu_contraseña_de_mysql',
+        'HOST': 'localhost',  # It may vary depending on the configuration of your MySQL server
+        'PORT': '',           # Leave blank to use the default port
+    }
+}
+
+
+## 4. Migraciones
+
+Perform the migrations
+
+```bash
+python manage.py makemigrations
+python manage.py migrate
+```
+
+# 5. Run project
+
+```bash
+python manage.py runserver
 ```
 
 
