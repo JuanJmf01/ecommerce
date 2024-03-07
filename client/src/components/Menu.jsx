@@ -19,7 +19,7 @@ function Menu() {
             <div className="left-item">ECOMMERCE</div>
             <ul className="middle-item">
                 <li><a href="/">Home</a></li>
-                <li><a href="/seleccion-sostenible">Selección Sostenible</a></li>
+                <li><a href="/seleccion-sostenible">Seleccion Sostenible</a></li>
             </ul>
             <div>
                 <button className="cart" onClick={handleIconClick}>

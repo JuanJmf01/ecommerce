@@ -82,6 +82,9 @@ python manage.py runserver
     cd client
     ```
 
+    Your route should look like this: ".../ecommerce/client" 
+
+
 3. install the packages
     ```
     npm install

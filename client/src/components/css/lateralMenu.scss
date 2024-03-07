@@ -1,0 +1,65 @@
+@import '../../components/constants/variables.scss';
+
+
+.lateral-menu {
+    width: $left-value-lateralMenu;
+    height: 100vh;
+    /* Establece la altura como 100% del viewport */
+    background-color: white;
+    color: black;
+    position: fixed;
+    /* Fija el menu en la pantalla */
+    top: 0;
+    /* Alinea el menu en la parte superior */
+    left: 0;
+    /* Alinea el menu en la parte izquierda */
+    transition: left 1s ease;
+    /* Agrega una transición al desplazamiento del menú */
+
+}
+
+
+.menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.menu-title {
+    margin: 0;
+    flex-grow: 1;
+    /* Hace que el titulo ocupe el espacio disponible */
+    text-align: center;
+    /* Centra el texto horizontalmente */
+}
+
+
+.close-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.close-button>svg {
+    font-size: 24px;
+    /* Tamaño del icono de cerrar */
+    color: black;
+    /* Color del icono de cerrar */
+}
+
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.menu-item i {
+    margin-right: 30px;
+}
+
+.menu-item:hover {
+    background-color: #dddddd;
+}

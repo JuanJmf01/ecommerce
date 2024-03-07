@@ -37,8 +37,8 @@ body {
 
 .login, .cart {
     display: inline-block;
-    background: none; /* Elimina el color de fondo predeterminado del botón */
-    border: none; /* Elimina el borde predeterminado del botón */
+    background: none; /* Elimina el color de fondo predeterminado del boton */
+    border: none; /* Elimina el borde predeterminado del boton */
 }
 
 .login span, .cart span {

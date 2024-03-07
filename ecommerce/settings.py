@@ -91,7 +91,7 @@ DATABASES = {
         'NAME': 'ecommerce',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': 'localhost',  # Puede variar según la configuración de tu servidor MySQL
+        'HOST': 'localhost',  # Puede variar según la configuracion de tu servidor MySQL
         'PORT': '',           # Deja en blanco para usar el puerto predeterminado
     }
 }
