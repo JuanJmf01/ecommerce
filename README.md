@@ -10,28 +10,24 @@ git clone https://github.com/JuanJmf01/ecommerce.git
 ## 1. Installation of the Virtual Environment to server
 
 To isolate the dependencies of this project, it is recommended to use a virtual environment. Follow these steps:
-1. Install `virtualenv` if you don't have it already:
+
+1. in the command console go to "/ecommerce"
+2. Install `virtualenv` if you don't have it already:
 
     ```
     pip install virtualenv
     ```
 
-2. Create a new virtual environment:
+3. Create a new virtual environment:
 
     ```
     virtualenv your_environment_name
     ```
 
-3. Activate the virtual environment. On Windows systems, run:
+4. Activate the virtual environment. On Windows systems, run:
 
     ```
     your_environment_name\Scripts\activate
-    ```
-
-   On Unix-based systems (Linux/macOS), run:
-
-    ```
-    source your_environment_name/bin/activate
     ```
 
 ## 2. Django Installation and Dependencies
@@ -70,10 +66,31 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-# 5. Run server
+## 5. Run server
 
 ```bash
 python manage.py runserver
 ```
+
+
+## 6. react configuration
+
+1. Make sure you have node.js installed. A version greater than 16.0
+
+2. Open another terminal and go to "/client"
+    ```
+    cd client
+    ```
+
+3. install the packages
+    ```
+    npm install
+    ```
+
+4. run the client
+    ```
+    npm run dev
+    ```
+
 
 
