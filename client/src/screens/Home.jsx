@@ -1,32 +1,19 @@
-import React, { useState } from 'react';
-import Menu from "./../components/Menu";
-import SecondaryMenu from "./../components/SecondaryMenu";
-import LateralMenu from "./../components/LateralMenu";
-
-import './css/home.scss'
+import Base from '../components/Base'
+import './css/home.css'
 
 function Home() {
-  const [isLateralMenuOpen, setIsLateralMenuOpen] = useState(false);
-
-  const toggleLateralMenu = () => {
-    setIsLateralMenuOpen(!isLateralMenuOpen);
-  };
-
-  return (
-    <div className="home-container">
-      <div className="menu-container">
-        <Menu />
-        <SecondaryMenu toggleLateralMenu={toggleLateralMenu} />
-        {isLateralMenuOpen && <LateralMenu toggleLateralMenu={toggleLateralMenu} />}
-      </div>
-      <div className={`content-container ${isLateralMenuOpen ? 'overlay-active' : ''}`}>
-        {/* Contenido principal de tu página */}
-        <div className="content">
-          {/* Contenido principal de tu página */}
+    return (
+        <div>
+            <Base />
+            <div className='content'>
+                <div className='home-content'>
+                    <div className="container">
+                        <h3>print</h3>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default Home;

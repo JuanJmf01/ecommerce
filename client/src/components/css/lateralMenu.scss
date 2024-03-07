@@ -1,8 +1,7 @@
-@import '../../components/constants/variables.scss';
+@import '../../constants/variables.scss';
 
 
 .lateral-menu {
-    width: $left-value-lateralMenu;
     height: 100vh;
     /* Establece la altura como 100% del viewport */
     background-color: white;
@@ -14,8 +13,30 @@
     left: 0;
     /* Alinea el menu en la parte izquierda */
     transition: left 1s ease;
-    /* Agrega una transición al desplazamiento del menú */
+}
 
+
+@media screen and (max-width: $large-screen-width) {
+    .lateral-menu {
+        width: $small-side-menu;
+    }
+}
+
+@media screen and (max-width: $medium-screen-width) {
+    .lateral-menu {
+        width: $medium-side-menu;
+    }
+}
+
+@media screen and (max-width: $small-screen-width) {
+    .lateral-menu {
+        width: $large-side-menu;
+    }
+}
+
+.menu-subTitle {
+    font-size: 17px; 
+    margin: 20px 0 5px 15px;
 }
 
 
@@ -24,6 +45,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px;
+    background-color: rgb(242, 242, 242);
 }
 
 .menu-title {
@@ -42,7 +64,7 @@
     cursor: pointer;
 }
 
-.close-button>svg {
+.close-button svg {
     font-size: 24px;
     /* Tamaño del icono de cerrar */
     color: black;
@@ -52,7 +74,6 @@
 
 .menu-item {
     display: flex;
-    align-items: center;
     padding: 5px;
 }
 
