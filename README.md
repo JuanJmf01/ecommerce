@@ -7,7 +7,7 @@ First, clone this repository to your local machine:
 git clone https://github.com/JuanJmf01/ecommerce.git
 ```
 
-## Installation of the Virtual Environment
+## 1. Installation of the Virtual Environment to server
 
 To isolate the dependencies of this project, it is recommended to use a virtual environment. Follow these steps:
 1. Install `virtualenv` if you don't have it already:
@@ -34,7 +34,7 @@ To isolate the dependencies of this project, it is recommended to use a virtual 
     source your_environment_name/bin/activate
     ```
 
-## Django Installation and Dependencies
+## 2. Django Installation and Dependencies
 
 Install Django and other dependencies necessary for your project:
 
@@ -70,7 +70,7 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-# 5. Run project
+# 5. Run server
 
 ```bash
 python manage.py runserver

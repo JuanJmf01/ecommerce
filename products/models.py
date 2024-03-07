@@ -54,7 +54,7 @@ class EcologicalCategories(models.Model):
     name = models.CharField(max_length=20) 
 
     class Meta:
-        db_table = 'genderCategories'
+        db_table = 'ecologicalCategories'
 
 
 
@@ -90,15 +90,13 @@ class ProductCategories(models.Model):
         db_table = 'productCategories'
 
 
-class ProductGeneralSizes(models.Model):
-    idSubProductShirtSize = models.AutoField(primary_key=True)
+class ProductEcologicalCategories(models.Model):
+    idProductEcologicalCategory = models.AutoField(primary_key=True)
     idProduct = models.ForeignKey(Products, on_delete=models.CASCADE)
-    idProductSize = models.ForeignKey(GeneralSizes, on_delete=models.CASCADE)
-    quantityAvailable = models.PositiveIntegerField()  
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    idEcologicalCategory = models.ForeignKey(EcologicalCategories, on_delete=models.CASCADE)
 
     class Meta:
-        db_table = 'productGeneralSizes'
+        db_table = 'productEcologicalCategories'
 
 
 class ProductGenderCategories(models.Model):
@@ -108,6 +106,17 @@ class ProductGenderCategories(models.Model):
 
     class Meta:
         db_table = 'productGenderCategories'
+
+
+class ProductGeneralSizes(models.Model):
+    idSubProductShirtSize = models.AutoField(primary_key=True)
+    idProduct = models.ForeignKey(Products, on_delete=models.CASCADE)
+    idProductSize = models.ForeignKey(GeneralSizes, on_delete=models.CASCADE)
+    quantityAvailable = models.PositiveIntegerField()  
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    class Meta:
+        db_table = 'productGeneralSizes'
 
 
 class ProductImages(models.Model):
@@ -124,7 +133,7 @@ class ProductRatings(models.Model):
     idProductRating = models.AutoField(primary_key=True)
     idProduct = models.ForeignKey(Products, on_delete=models.CASCADE)
     idRaterUser = models.ForeignKey(User, on_delete=models.CASCADE)     # qualifier user id
-    like = models.BooleanField(default=False)
+    # like = models.BooleanField(default=False)
     rating = models.IntegerField(default = 0,
         validators=[MinValueValidator(0), MaxValueValidator(5)]
     )

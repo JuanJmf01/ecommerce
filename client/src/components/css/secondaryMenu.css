@@ -1,0 +1,34 @@
+.secondaryMenu {
+    display: flex;
+    padding: 0% 3%;
+    align-items: center;
+}
+
+.sideMenuButton {
+    display: flex;
+    align-items: center; /* Alinear verticalmente los elementos */
+    border: none; /* Elimina el borde */
+    background-color: transparent; /* Establece el color de fondo transparente */
+}
+
+.sideMenuButton p {
+    margin-left: 5px;
+}
+
+.sideMenuButton span svg{
+    font-size: 19px; /* Tamaño del icono */
+}
+
+.items a {
+    text-decoration: none;
+    color: black;
+}
+
+.items {
+    display: flex;
+    list-style-type: none;
+}
+
+.items li {
+    margin: 0px 15px;
+}
