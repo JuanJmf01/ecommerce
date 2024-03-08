@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { CiUser } from "react-icons/ci";
 import { PiShoppingCart } from "react-icons/pi";
+import { colorBlueLight, colorPinkLight } from "../constants/variables"
 
 import ComponenteConTamañoDePantalla from '../constants/ScreenSize'
 
 import './css/menu.scss';
+import ButtonIconContainer from './ButtonIconContainer';
 
 
 function Menu() {
@@ -30,13 +32,17 @@ function Menu() {
             }
 
             <div className="right-items">
-                <button className="cart" onClick={handleIconClick}>
-                    <span><PiShoppingCart /></span>
-                </button>
+                <ButtonIconContainer
+                    handleIconClick={handleIconClick}
+                    backgroundContainer={colorBlueLight}
+                    icon={<PiShoppingCart />}
+                />
 
-                <button className="login" onClick={handleIconClick}>
-                    <span><CiUser /></span>
-                </button>
+                <ButtonIconContainer
+                    handleIconClick={handleIconClick}
+                    backgroundContainer={colorPinkLight}
+                    icon={<CiUser />}
+                />
             </div>
 
         </div>

@@ -11,7 +11,7 @@ body {
     top: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); 
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 998;
 }
 
@@ -22,7 +22,7 @@ body {
 }
 
 @media screen and (max-width: $medium-screen-width) {
-    .overlay-active::after  {
+    .overlay-active::after {
         left: $medium-side-menu;
     }
 }
@@ -65,50 +65,6 @@ body {
 
 .right-items {
     margin-left: auto;
-}
-
-.login,
-.cart {
-    display: inline-block;
-    background: none;
-    /* Elimina el color de fondo predeterminado del boton */
-    border: none;
-    /* Elimina el borde predeterminado del boton */
-}
-
-.login span,
-.cart span {
     display: flex;
-    align-items: center;
-    /* Alinea verticalmente el icono */
-    justify-content: center;
-    /* Centra horizontalmente el icono */
-    width: 35px;
-    /* Tamaño del icono */
-    height: 35px;
-    /* Tamaño del icono */
-    border-radius: 50%;
-}
-
-.login span {
-    background-color: $colorPinkLight;
-    /* Color de fondo para el icono de login */
-}
-
-.cart span {
-    background-color: $colorBlueLight;
-    /* Color de fondo para el icono de carrito */
-}
-
-.login span svg,
-.cart span svg {
-    color: rgb(22, 22, 22);
-    /* Color del icono */
-    font-size: 17px;
-    /* Tamaño del icono */
-}
-
-.login span svg {
-    stroke-width: 0.5px;
-    /* Grosor del trazo */
+    gap: 12px;
 }
