@@ -3,7 +3,6 @@
 .product-container {
     display: flex;
     flex-direction: column;
-    margin-bottom: 50px;
 }
 
 .discount {
@@ -15,9 +14,7 @@
     margin-top: 6px;
     margin-bottom: 6px;
     font-size: 0.9em;
-
 }
-
 
 .discount p {
     margin: 0;
@@ -46,23 +43,11 @@
     font-size: 0.9em;
 }
 
-@media screen and (max-width: $medium-screen-width) {
-    .product-name {
-        font-size: 0.8em;
-    }
-
-    .price-container p {
-        font-size: 0.8em;
-    }
-}
-
-
 .product-info p:first-child {
     margin-bottom: -10px;
     margin-right: 10px;
     /* Espacio entre el precio del producto y los precios */
 }
-
 
 .price-container {
     display: flex;
@@ -75,4 +60,16 @@
     margin-top: 9px;
     margin-left: auto;
     /* Empuja el último elemento hacia la derecha */
+}
+
+
+
+@media screen and (max-width: $medium-screen-width) {
+    .product-name {
+        font-size: 0.8em;
+    }
+
+    .price-container p {
+        font-size: 0.8em;
+    }
 }

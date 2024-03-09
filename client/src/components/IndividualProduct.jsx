@@ -4,14 +4,13 @@ import { PiShoppingCart } from "react-icons/pi";
 import { colorBlack } from '../constants/variables';
 
 import ButtonIconContainer from './ButtonIconContainer';
-import ComponenteConTamañoDePantalla from '../constants/ScreenSize'
 
 
 const ProductContainer = styled.div`
     border-radius: ${({ borderRadius }) => borderRadius || '17px'};
-    background-color: ${({ backgroundColor }) => backgroundColor || 'white'};
-    width: ${({ width }) => width || '190px'};
-    height:  ${({ height }) => height || '300px'};
+    background-color: ${({ backgroundcolor }) => backgroundcolor || 'white'};
+    width: ${({ width }) => width || '180px'};
+    height:  ${({ height }) => height || '270px'};
 `;
 
 const ProductImage = styled.div`
@@ -20,14 +19,13 @@ const ProductImage = styled.div`
 `;
 
 
-function IndividualProduct({ borderRadius, backgroundColor, width, height, imageHeight }) {
+function IndividualProduct({ borderRadius, backgroundcolor, width, height, imageHeight }) {
 
-    const screenSize = ComponenteConTamañoDePantalla();
 
     return (
-        <ProductContainer className='product-container' borderRadius={borderRadius} backgroundColor={backgroundColor} width={width} height={height}>
+        <ProductContainer className='product-container' borderRadius={borderRadius} backgroundcolor={backgroundcolor} width={width} height={height}>
             <div className='discount'>
-                <p>20 %</p>
+                <p>20%</p>
             </div>
             <ProductImage className='product-image' color="grey" height={imageHeight || '180px'}>
                 <img src="https://static.vecteezy.com/system/resources/thumbnails/023/329/714/small/heart-tree-love-for-nature-red-landscape-at-sunset-generativ-ai-photo.jpg" />
@@ -38,8 +36,8 @@ function IndividualProduct({ borderRadius, backgroundColor, width, height, image
                     <p>$54.99</p>
                     <p>$32.99</p>
                     <ButtonIconContainer
-                        backgroundContainer={colorBlack}
-                        iconColor="white"
+                        backgroundcontainer={colorBlack}
+                        iconcolor="white"
                         icon={<PiShoppingCart />}
                     />
                 </div>

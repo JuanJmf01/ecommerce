@@ -3,21 +3,14 @@
 $global-padding: 5%;
 
 
-.content {
+.home-content {
     padding: 0 10%;
     /* padding a la izquierda y a la derecha */
-    background-color: rgb(246, 251, 255);
-}
-
-@media screen and (max-width: 1100px) {
-    .content {
-        padding: 0 0%;
-    }
-
+    background-color: white;
 }
 
 
-.home-content {
+.home-content-container {
     display: flex;
     flex-direction: column;
     /* Mantén la dirección del flex a columna */
@@ -32,25 +25,91 @@ $global-padding: 5%;
     background-color: $colorPinkSuperLight;
     padding: 0 $global-padding;
     /* Aplicar el padding solo en los lados */
-    overflow-x: auto;
-    /* Habilitar el desplazamiento horizontal si es necesario */
-    -webkit-overflow-scrolling: touch;
-    /* Habilitar el desplazamiento suave en dispositivos móviles */
 }
 
 
-@media screen and (max-width: $medium-screen-width) {
-    .product-list {
-        overflow-x: auto;
-        /* Habilita el desplazamiento horizontal en pantallas más pequeñas */
-    }
+.discount-products-content {
+    display: inline-block;
+    margin: 5px;
+}
 
-    .discount-products {
-        padding: 0;
-    }
+.discount-product-list {
+    white-space: nowrap;
+    overflow-x: auto;
+    padding-left: 3%;
+    margin-bottom: 50px;
 
-    .discount-products-title {
-        padding: 10px 0 0 30px;
+}
+
+.sustainable-categories {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: "white";
+    padding: 0 $global-padding;
+    padding-bottom: 40px;
+    /* Aplicar el padding solo en los lados */
+}
+
+
+.sustainable-categories-list {
+    white-space: nowrap;
+    overflow-x: auto;
+    padding-left: 3%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    padding-bottom: 50px;
+}
+
+
+.sustainable-categories-content {
+    display: inline-block;
+    margin: 5px;
+}
+
+.phrase-container {
+    background-color: rgba(61, 61, 61, 1);
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    color: white;
+    padding: 6%;
+}
+
+.phrase {
+    padding-right: 50%;
+}
+
+.phrase-autor {
+    padding-top: 2%;
+    padding-left: 40%;
+}
+
+.products-content {
+    background-color: $colorBlueSuperLight;
+    padding: 0 $global-padding;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Alinea los elementos horizontalmente */
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan a la siguiente fila */
+    flex-direction: row;
+    gap: 20px; /* Espacio entre los elementos */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    padding-bottom: 100px;
+
+}
+
+
+.products-content h3 {
+    align-self: flex-start;
+    /* Alinea el título h3 al inicio verticalmente */
+}
+
+@media screen and (max-width: 1100px) {
+    .home-content {
+        padding: 0 0%;
     }
 }
 
@@ -61,18 +120,43 @@ $global-padding: 5%;
     }
 }
 
+@media screen and (max-width: $medium-screen-width) {
 
+    .discount-products,
+    .sustainable-categories {
+        padding: 0;
+    }
 
+    .discount-products-title,
+    .sustainable-categories-title {
+        padding: 10px 0 0 30px;
+    }
 
+    .phrase {
+        padding-right: 50%;
+    }
 
-
-.contenedor {
-    display: inline-block;
-    margin: 5px;
+    .phrase-autor {
+        padding-left: 35%;
+    }
 }
 
+@media screen and (max-width: $small-screen-width) {
 
-.product-list {
-    white-space: nowrap;
-    overflow-x: auto;
+    .phrase {
+        padding-right: 8%;
+    }
+
+    .phrase-autor {
+        padding-left: 75%;
+    }
+
+    .product-list {
+        gap: 5px; /* Espacio entre los elementos */
+    }
+
+    .products-content {
+        padding: 0;
+    }
+    
 }

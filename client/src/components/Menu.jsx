@@ -34,13 +34,13 @@ function Menu() {
             <div className="right-items">
                 <ButtonIconContainer
                     handleIconClick={handleIconClick}
-                    backgroundContainer={colorBlueLight}
+                    backgroundcontainer={colorBlueLight}
                     icon={<PiShoppingCart />}
                 />
 
                 <ButtonIconContainer
                     handleIconClick={handleIconClick}
-                    backgroundContainer={colorPinkLight}
+                    backgroundcontainer={colorPinkLight}
                     icon={<CiUser />}
                 />
             </div>

@@ -3,31 +3,30 @@ import styled from 'styled-components';
 import ComponenteConTamañoDePantalla from '../constants/ScreenSize'
 
 
-
 const ButtonIcon = styled.button`
     background: none;
     border: none;
-    width: ${({ sizeContainer }) => sizeContainer};
-    height: ${({ sizeContainer }) => sizeContainer};
+    width: ${({ sizecontainer }) => sizecontainer};
+    height: ${({ sizecontainer }) => sizecontainer};
     border-radius: 50%;
-    background-color: ${({ backgroundContainer }) => backgroundContainer};
+    background-color: ${({ backgroundcontainer }) => backgroundcontainer};
 `;
 
 const StyledIcon = styled.span`
-    font-size: ${({ iconSize }) => iconSize || '17px'};
-    color: ${({ iconColor }) => iconColor || 'black'};
+    font-size: ${({ iconsize }) => iconsize || '17px'};
+    color: ${({ iconcolor }) => iconcolor || 'black'};
 `;
 
-function ButtonIconContainer({ handleIconClick, backgroundContainer, icon, iconColor }) {
+function ButtonIconContainer({ handleIconClick, backgroundcontainer, icon, iconcolor }) {
 
     const screenSize = ComponenteConTamañoDePantalla();
-    let iconSize = screenSize.screenWidth < 950 ? '1em' : '1.2em'
-    let sizeContainer = screenSize.screenWidth < 950 ? '2.3em' : '2.7em'
+    let iconsize = screenSize.screenWidth < 950 ? '1em' : '1.2em'
+    let sizecontainer = screenSize.screenWidth < 950 ? '2.3em' : '2.7em'
 
 
     return (
-        <ButtonIcon sizeContainer={sizeContainer} backgroundContainer={backgroundContainer} onClick={handleIconClick}>
-            <StyledIcon iconSize={iconSize} iconColor={iconColor}>{icon}</StyledIcon>
+        <ButtonIcon sizecontainer={sizecontainer} backgroundcontainer={backgroundcontainer} onClick={handleIconClick}>
+            <StyledIcon iconsize={iconsize} iconcolor={iconcolor}>{icon}</StyledIcon>
         </ButtonIcon>
     );
 }
