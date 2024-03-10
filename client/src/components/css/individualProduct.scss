@@ -24,52 +24,69 @@
 .product-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .product-info {
-    margin-left: 10px;
+    margin: 10px;
 }
 
-.product-info p {
-    margin-top: 10px;
-}
-
-.product-name {
-    font-size: 0.9em;
-}
-
-.price-container p {
-    font-size: 0.9em;
-}
 
 .product-info p:first-child {
-    margin-bottom: -10px;
+    margin-bottom: -5px;
     margin-right: 10px;
     /* Espacio entre el precio del producto y los precios */
 }
 
-.price-container {
+.product-info {
     display: flex;
-    margin-top: 8px;
+    flex-direction: column;
+    /* Alinea los elementos en una columna */
 }
 
-.price-container button:last-child {
-    margin-right: 7px;
-    /* Reinicia el margen derecho para el último elemento */
-    margin-top: 9px;
-    margin-left: auto;
-    /* Empuja el último elemento hacia la derecha */
+
+.product-name {
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.product-description {
+    font-size: 0.8em;
+    color: $colorGreyDark;
+}
+
+
+.price-cart-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.price-container {
+    display: flex;
+}
+
+.previous-price {
+    text-decoration: line-through;
+    color: $colorGrey;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.current-price {
+    font-size: 0.85em;
+    font-weight: bold;
 }
 
 
 
 @media screen and (max-width: $medium-screen-width) {
     .product-name {
-        font-size: 0.8em;
+        font-size: 0.7em;
     }
 
     .price-container p {
-        font-size: 0.8em;
+        font-size: 0.7em;
     }
 }

@@ -54,11 +54,12 @@ function Home() {
                                     {screenSize.screenWidth > 800 ?
                                         <IndividualProduct
                                             width={index === 1 ? "200px" : undefined}
-                                            height={index === 1 ? "300px" : undefined}
-                                            imageHeight={index === 1 ? '180px' : undefined}
+                                            height={index === 1 ? "270px" : undefined}
+                                            imageHeight={index === 1 ? '160px' : undefined}
                                             backgroundcolor={index === 1 ? colorPinkLight : colorWhite}
-                                        /> : <IndividualProduct width="155px"
-                                            height="240px"
+                                        /> : <IndividualProduct width="175px"
+                                            height="220px"
+                                            imageHeight="110px"
                                             backgroundcolor={index === 1 ? colorPinkLight : colorWhite}
                                         />
                                     }
@@ -121,16 +122,16 @@ function Home() {
                         <h3>Todos los productos</h3>
                         <div className='product-list'>
                             <div className='individual-product'>
-                                <IndividualProduct />
+                                <IndividualProduct description="English. Many desktop publishing packages and web page editors now use" />
                             </div>
                             <div className='individual-product'>
-                                <IndividualProduct />
+                                <IndividualProduct description="English. Many desktop publishing packages and web page editors now use" />
                             </div>
                             <div className='individual-product'>
-                                <IndividualProduct />
+                                <IndividualProduct description="English. Many desktop publishing packages and web page editors now use" />
                             </div>
                             <div className='individual-product'>
-                                <IndividualProduct />
+                                <IndividualProduct description="English. Many desktop publishing packages and web page editors now use" />
                             </div>
                             
                             

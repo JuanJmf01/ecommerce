@@ -23,7 +23,7 @@ $global-padding: 5%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-color: $colorPinkSuperLight;
-    padding: 0 $global-padding;
+    padding: 25px $global-padding;
     /* Aplicar el padding solo en los lados */
 }
 
@@ -45,7 +45,7 @@ $global-padding: 5%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-color: "white";
-    padding: 0 $global-padding;
+    padding: 24px $global-padding;
     padding-bottom: 40px;
     /* Aplicar el padding solo en los lados */
 }
@@ -85,7 +85,7 @@ $global-padding: 5%;
 
 .products-content {
     background-color: $colorBlueSuperLight;
-    padding: 0 $global-padding;
+    padding: 25px $global-padding;
     display: flex;
     flex-direction: column;
     align-items: center; /* Alinea los elementos horizontalmente */
@@ -98,7 +98,6 @@ $global-padding: 5%;
     gap: 20px; /* Espacio entre los elementos */
     justify-content: center; /* Centra los elementos horizontalmente */
     padding-bottom: 100px;
-
 }
 
 
