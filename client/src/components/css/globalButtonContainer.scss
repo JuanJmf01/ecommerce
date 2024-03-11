@@ -1,0 +1,19 @@
+@import '../../constants/variables.scss';
+
+.button {
+  border: none;
+  background-color: transparent;
+  text-decoration: none;
+  /* Quita la línea que aparece debajo del enlace */
+  color: black;
+  /* Cambia el color del texto del enlace al rojo (cambia el valor a tu preferencia) */
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+.button-container {
+  border-radius: 30px;
+  padding: 8px 24px;
+  transition: padding 0.3s ease; /* Agrega una transición de 0.3 segundos con un efecto de ease */
+
+}

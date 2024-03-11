@@ -4,6 +4,7 @@ import ComponenteConTamañoDePantalla from '../constants/ScreenSize'
 
 
 const ButtonIcon = styled.button`
+    cursor: pointer; 
     background: none;
     border: none;
     width: ${({ sizecontainer }) => sizecontainer};

@@ -20,7 +20,7 @@ const CategoryImageContainer = styled.div`
     color: ${({ iconcolor }) => iconcolor || colorGrey};
 `
 
-function SustainableCategoriesContainer({ width, height, background, borderColor, iconcolor }) {
+function SustainableCategoriesContainer({ width, height, background, borderColor, iconcolor, name, description }) {
     const screenSize = ComponenteConTamañoDePantalla();
 
     let sizeImageContainer = screenSize.screenWidth < mediumScreenWidth ? '55px' : '65px';
@@ -32,9 +32,9 @@ function SustainableCategoriesContainer({ width, height, background, borderColor
                 <CategoryImageContainer className='sustainable-category-image-container' width={sizeImageContainer} height={sizeImageContainer} fontSize={fontSizeImage} background={background} borderColor={borderColor} iconcolor={iconcolor}>
                     <GiRecycle />
                 </CategoryImageContainer>
-                <h4 className='sustainable-category-name'>CategoryName</h4>
+                <h4 className='sustainable-category-name'>{name}</h4>
             </div>
-            <p className='sustainable-category-description'>English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text</p>
+            <p className='sustainable-category-description'>{description}</p>
         </CategoryContainer>
     );
 }

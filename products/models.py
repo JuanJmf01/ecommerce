@@ -52,6 +52,9 @@ class GenderCategories(models.Model):
 class EcologicalCategories(models.Model):
     idEcologicalCategory = models.AutoField(primary_key=True)
     name = models.CharField(max_length=20) 
+    description = models.TextField(null=True)
+    # image = models.ImageField(upload_to='ecological_category_images/', null=True, blank=True)
+
 
     class Meta:
         db_table = 'ecologicalCategories'

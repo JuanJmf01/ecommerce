@@ -1,11 +1,11 @@
-import { useState } from 'react';
 import { IoClose } from "react-icons/io5";
+import React, { useState } from 'react';
 
-import './css/lateralMenu.scss';
 
 
-function LateralMenu({ toggleLateralMenu }) {
+function LateralMenu({ toggleLateralMenu, categories, ecologicalcategories, genderCategories }) {
     const [iconClicked, setIconClicked] = useState(false);
+
 
     const handleIconClick = () => {
         setIconClicked(!iconClicked);
@@ -21,24 +21,17 @@ function LateralMenu({ toggleLateralMenu }) {
                 </div>
 
                 <h3 className='menu-subTitle'>Contenido</h3>
-                {/* Lista de categorias */}
-                <div className="menu-item">
-                    <i className="fas fa-home"></i>
-                    <span>Inicio</span>
-                </div>
-                <div className="menu-item">
-                    <i className="fas fa-user"></i>
-                    <span>Perfil</span>
-                </div>
-                <div className="menu-item">
-                    <i className="fas fa-cog"></i>
-                    <span>Configuracion</span>
-                </div>
+                {/* Categories list */}
+                {categories}
                 <h3 className="menu-subTitle">Seleccion sostenible</h3>
-                {/* Lista de categorias de sostenibilidad  */}
+                {/* List of sustainable categories */}
+
+                {ecologicalcategories}
 
                 <h3 className="menu-subTitle">Seleccion por segmento</h3>
-                {/* Lista de categorias de segmento */}
+                {/* List of categories by gender */}
+
+                {genderCategories}
             </div>
         </div>
     );

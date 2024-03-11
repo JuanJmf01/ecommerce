@@ -12,10 +12,16 @@ const ProductContainer = styled.div`
     background-color: ${({ backgroundcolor }) => backgroundcolor || 'white'};
     width: ${({ width }) => width || '180px'};
     height: ${({ height }) => height || 'auto'};
+
+    transition: width 0.7s ease; 
+    
+    &:hover {
+        width: 190px;
+    }
 `;
 
 const ProductImage = styled.div`
-    background-color: ${props => props.color}; 
+    background - color: ${props => props.color};
     height: ${props => props.height};
 `;
 

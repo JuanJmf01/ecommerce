@@ -1,18 +1,52 @@
 @import '../../constants/variables.scss';
 
-
 .lateral-menu {
     height: 100vh;
-    /* Establece la altura como 100% del viewport */
     background-color: white;
     color: black;
     position: fixed;
-    /* Fija el menu en la pantalla */
     top: 0;
-    /* Alinea el menu en la parte superior */
     left: 0;
-    /* Alinea el menu en la parte izquierda */
     transition: left 1s ease;
+    overflow-y: auto; /* Habilitar el scroll vertical */
+}
+
+
+.menu-subTitle {
+    font-size: 17px;
+    margin: 20px 0 5px 15px;
+}
+
+
+.menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: rgb(242, 242, 242);
+}
+
+.menu-title {
+    margin: 0;
+    flex-grow: 1;
+    text-align: center;
+}
+
+
+.close-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.close-button svg {
+    font-size: 24px;
+    color: black;
+}
+
+.menu-item:hover {
+    background-color: #dddddd;
 }
 
 
@@ -32,55 +66,4 @@
     .lateral-menu {
         width: $large-side-menu;
     }
-}
-
-.menu-subTitle {
-    font-size: 17px; 
-    margin: 20px 0 5px 15px;
-}
-
-
-.menu-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: rgb(242, 242, 242);
-}
-
-.menu-title {
-    margin: 0;
-    flex-grow: 1;
-    /* Hace que el titulo ocupe el espacio disponible */
-    text-align: center;
-    /* Centra el texto horizontalmente */
-}
-
-
-.close-button {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-}
-
-.close-button svg {
-    font-size: 24px;
-    /* Tamaño del icono de cerrar */
-    color: black;
-    /* Color del icono de cerrar */
-}
-
-
-.menu-item {
-    display: flex;
-    padding: 5px;
-}
-
-.menu-item i {
-    margin-right: 30px;
-}
-
-.menu-item:hover {
-    background-color: #dddddd;
 }

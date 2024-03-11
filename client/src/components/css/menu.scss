@@ -14,24 +14,6 @@ body {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-@media screen and (max-width: $large-screen-width) {
-    .overlay-active::after {
-        left: $small-side-menu;
-    }
-}
-
-@media screen and (max-width: $medium-screen-width) {
-    .overlay-active::after {
-        left: $medium-side-menu;
-    }
-}
-
-@media screen and (max-width: $small-screen-width) {
-    .overlay-active::after {
-        left: $large-side-menu;
-    }
-}
-
 
 .menu {
     display: flex;
@@ -49,13 +31,11 @@ body {
     list-style-type: none;
 }
 
-.middle-item li {
-    margin: 0px 15px;
-}
-
 .middle-item a {
     text-decoration: none;
     color: black;
+    margin: 0px 15px;
+
 }
 
 .middle-item div {
@@ -66,4 +46,24 @@ body {
     margin-left: auto;
     display: flex;
     gap: 12px;
+}
+
+
+
+@media screen and (max-width: $large-screen-width) {
+    .overlay-active::after {
+        left: $small-side-menu;
+    }
+}
+
+@media screen and (max-width: $medium-screen-width) {
+    .overlay-active::after {
+        left: $medium-side-menu;
+    }
+}
+
+@media screen and (max-width: $small-screen-width) {
+    .overlay-active::after {
+        left: $large-side-menu;
+    }
 }

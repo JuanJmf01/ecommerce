@@ -7,6 +7,7 @@ import ComponenteConTamañoDePantalla from '../constants/ScreenSize'
 
 import './css/menu.scss';
 import ButtonIconContainer from './ButtonIconContainer';
+import { Link } from 'react-router-dom';
 
 
 function Menu() {
@@ -26,8 +27,8 @@ function Menu() {
 
             {screenSize.screenWidth > 650 &&
                 <ul className="middle-item">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/seleccion-sostenible">Seleccion Sostenible</a></li>
+                    <Link to="/">Home</Link>
+                    <Link to="/seleccion-sostenible">Seleccion Sostenible</Link>
                 </ul>
             }
 

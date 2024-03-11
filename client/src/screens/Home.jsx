@@ -1,17 +1,23 @@
-import React, { useRef, useState } from 'react';
-import Base from '../components/Base';
-import './css/home.scss';
 import ComponenteConTamañoDePantalla from '../constants/ScreenSize';
-import { colorWhite, colorPinkLight, colorPink, colorBlueSuperLight, colorBlue, colorPinkSuperLight } from '../constants/variables';
-import SustainableCategoriesContainer from '../components/SustainableCategoriesContainer';
-
 import IndividualProduct from '../components/IndividualProduct';
+import SustainableCategoriesContainer from '../components/SustainableCategoriesContainer';
+import { getAllEcologicalCategories } from '../data/services/api/ecologicalCategories.api.js'
+
+import React, { useEffect, useRef, useState } from 'react';
+import { colorWhite, colorPinkLight, colorPink, colorBlueSuperLight, colorBlue, colorPinkSuperLight, colorBlueLight } from '../constants/variables';
+
+
+import './css/home.scss';
+import GlobalLinkContainer from '../components/globalLinkContainer.jsx';
+
 
 
 function Home() {
     const widthContainerCategory = '140px';
     const heightContainerCategory = '180px';
     const screenSize = ComponenteConTamañoDePantalla();
+
+    const [ecologicalCategories, setEcologicalCategories] = useState()
 
 
     const categoriesListRef = useRef(null);
@@ -37,13 +43,27 @@ function Home() {
         if (!isDown) return;
         e.preventDefault();
         const x = e.pageX - categoriesListRef.current.offsetLeft;
-        const walk = (x - startX) * 2; // Ajusta la velocidad del desplazamiento
+        const walk = (x - startX) * 2; // Velocidad del desplazamiento
         categoriesListRef.current.scrollLeft = scrollLeft - walk;
     };
 
+    async function loadEcologicalCategories() {
+        try {
+            const res = await getAllEcologicalCategories();
+            setEcologicalCategories(res.data);
+        } catch (error) {
+            console.error("Error al cargar categorías ecológicas:", error);
+        }
+    }
+
+    useEffect(() => {
+
+        loadEcologicalCategories()
+
+    }, [])
+
     return (
         <div>
-            <Base />
             <div className='home-content'>
                 <div className='home-content-container'>
                     <div className="discount-products">
@@ -66,6 +86,9 @@ function Home() {
                                 </div>
                             ))}
                         </div>
+                        <div className='discount-store-button'>
+                            <GlobalLinkContainer name="Open store" color={colorBlueLight} hoverColor={colorBlue}/>
+                        </div>
                     </div>
                     <div className="sustainable-categories">
                         <h3 className='sustainable-categories-title'>Seleccion sostenible</h3>
@@ -77,64 +100,74 @@ function Home() {
                             onMouseUp={handleMouseUp}
                             onMouseMove={handleMouseMove}
                         >
-                            {[1, 2, 3, 4, 5, 6, 7].map((index) => (
+
+                            {ecologicalCategories && ecologicalCategories.map((category, index) => (
                                 <div key={index} className={`sustainable-categories-content`}>
                                     {screenSize.screenWidth > 950
-                                        ? index % 6 === 0 || index === 1
+                                        ? index % 6 === 0 || index === 0
                                             ? <SustainableCategoriesContainer
                                                 background={colorBlueSuperLight}
                                                 borderColor={colorBlue}
-                                                iconcolor={colorBlue} />
+                                                iconcolor={colorBlue}
+                                                name={category.name}
+                                                description={category.description} />
                                             : index !== 1 && index % 2 !== 0
                                                 ? < SustainableCategoriesContainer
                                                     background={colorPinkSuperLight}
                                                     borderColor={colorPink}
-                                                    iconcolor={colorPink} />
-                                                : <SustainableCategoriesContainer />
-                                        : index % 6 === 0 || index === 1
+                                                    iconcolor={colorPink}
+                                                    name={category.name}
+                                                    description={category.description} />
+                                                : <SustainableCategoriesContainer
+                                                    name={category.name}
+                                                    description={category.description} />
+                                        : index % 6 === 0 || index === 0
                                             ? <SustainableCategoriesContainer
                                                 width={widthContainerCategory}
                                                 height={heightContainerCategory}
                                                 background={colorBlueSuperLight}
                                                 borderColor={colorBlue}
-                                                iconcolor={colorBlue} />
+                                                iconcolor={colorBlue}
+                                                name={category.name}
+                                                description={category.description} />
                                             : index !== 1 && index % 2 !== 0
                                                 ? < SustainableCategoriesContainer
                                                     width={widthContainerCategory}
                                                     height={heightContainerCategory}
                                                     background={colorPinkSuperLight}
                                                     borderColor={colorPink}
-                                                    iconcolor={colorPink} />
+                                                    iconcolor={colorPink}
+                                                    name={category.name}
+                                                    description={category.description} />
                                                 : <SustainableCategoriesContainer
                                                     width={widthContainerCategory}
-                                                    height={heightContainerCategory} />
+                                                    height={heightContainerCategory}
+                                                    name={category.name}
+                                                    description={category.description}
+                                                />
 
                                     }
                                 </div>
+
                             ))}
                         </div>
                     </div>
+
                     <div className='phrase-container'>
                         <p className='phrase'> English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover</p>
                         <p className='phrase-autor'>Autor</p>
                     </div>
                     <div className='products-content'>
-                        <h3>Todos los productos</h3>
+                        <h3>All products</h3>
                         <div className='product-list'>
-                            <div className='individual-product'>
-                                <IndividualProduct description="English. Many desktop publishing packages and web page editors now use" />
-                            </div>
-                            <div className='individual-product'>
-                                <IndividualProduct description="English. Many desktop publishing packages and web page editors now use" />
-                            </div>
-                            <div className='individual-product'>
-                                <IndividualProduct description="English. Many desktop publishing packages and web page editors now use" />
-                            </div>
-                            <div className='individual-product'>
-                                <IndividualProduct description="English. Many desktop publishing packages and web page editors now use" />
-                            </div>
-                            
-                            
+                            {[1, 2, 3, 4].map((item, index) => (
+                                <div key={index} className='individual-product'>
+                                    <IndividualProduct description="English. Many desktop publishing packages and web page editors now use" />
+                                </div>
+                            ))}
+                        </div>
+                        <div className='products-store-button'>
+                            <GlobalLinkContainer name="Open store" color={colorPinkLight} hoverColor={colorPink}/>
                         </div>
                     </div>
                 </div>
