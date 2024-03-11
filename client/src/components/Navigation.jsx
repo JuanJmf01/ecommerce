@@ -13,13 +13,13 @@ function Navigation({ withLateralMenu }) {
   const toggleLateralMenu = () => {
     setIsLateralMenuOpen(!isLateralMenuOpen);
   };
-  
+
 
   return (
     <div>
       <Menu />
-      <SecondaryMenu toggleLateralMenu={toggleLateralMenu} withLateralMenu={withLateralMenu} />
-      {withLateralMenu && isLateralMenuOpen ? <LateralMenu
+      {withLateralMenu ? <SecondaryMenu toggleLateralMenu={toggleLateralMenu} withLateralMenu={withLateralMenu} /> : undefined}
+      {isLateralMenuOpen ? <LateralMenu
         toggleLateralMenu={toggleLateralMenu} withLateralMenu={withLateralMenu}
       /> : undefined}
     </div>

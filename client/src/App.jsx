@@ -35,7 +35,7 @@ function ProductsNavigation() {
 
   return (
     <>
-      <Navigation withLateralMenu={screenSize.screenWidth > smallScreenWidth ? false : true} />
+      <Navigation withLateralMenu={false} />
       <Products />
     </>
   );
@@ -43,4 +43,3 @@ function ProductsNavigation() {
 
 
 export default App
-

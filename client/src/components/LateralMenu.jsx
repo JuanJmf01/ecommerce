@@ -95,7 +95,6 @@ function LateralMenu({ toggleLateralMenu, withLateralMenu, onSelectCategory }) {
                         <Link to={`/products/category/${category.idCategory}`} onClick={toggleLateralMenu}>
                             <span onClick={() => handleCategoryClick(category)}>{category.name}</span>
                         </Link>
-
                     </MenuItem>
                 ))}
                 <h3 className="menu-subTitle">Seleccion sostenible</h3>
@@ -103,7 +102,7 @@ function LateralMenu({ toggleLateralMenu, withLateralMenu, onSelectCategory }) {
                 {ecologicalcategories && ecologicalcategories.map((category) => (
                     <MenuItem key={category.idEcologicalCategory}>
                         <Link to={`/products/ecological/${category.idEcologicalCategory}`} onClick={toggleLateralMenu}>
-                            <span>{category.name}</span>
+                            <span onClick={() => handleCategoryClick(category)}>{category.name}</span>
                         </Link>
                     </MenuItem>
                 ))}
@@ -114,7 +113,7 @@ function LateralMenu({ toggleLateralMenu, withLateralMenu, onSelectCategory }) {
                 {gendercategories && gendercategories.map((category) => (
                     <MenuItem key={category.idGenderCategory}>
                         <Link to={`/products/gender/${category.idGenderCategory}`} onClick={toggleLateralMenu}>
-                            <span>{category.name}</span>
+                            <span onClick={() => handleCategoryClick(category)} >{category.name}</span>
                         </Link>
                     </MenuItem>
                 ))}

@@ -15,11 +15,11 @@ function SecondaryMenu({ toggleLateralMenu, withLateralMenu }) {
 
   return (
     <div className="secondaryMenu">
-      <button className='sideMenuButton' onClick={handleIconClick}>
-        {withLateralMenu ? <span><AiOutlineAlignLeft /></span> : undefined}
-        {withLateralMenu ? <p>Todo</p> : undefined}
+      {withLateralMenu ? <button className='sideMenuButton' onClick={handleIconClick}>
+        <span><AiOutlineAlignLeft /></span>
+        <p>Todo</p>
 
-      </button>
+      </button> : undefined}
       <ul className='items'>
         <li><a href="/servicio_cliente">Servicio al cliente</a></li>
         <li><a href="/vender">Vender</a></li>
