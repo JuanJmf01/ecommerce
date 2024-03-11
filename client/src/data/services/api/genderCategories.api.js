@@ -4,7 +4,7 @@ import config from './config/config';
 
 
 const productsApiGenderCategories = axios.create({
-    baseURL: `${config.url}/${config.products}/categories/`
+    baseURL: `${config.url}/${config.products}/genderCategories/`
 })
 
 

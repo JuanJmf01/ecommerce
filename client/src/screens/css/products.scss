@@ -1,0 +1,46 @@
+.container {
+    display: flex;
+}
+
+.search-products-content {
+    flex: 1;
+
+}
+
+.filters-by-category-container {
+    padding: 20px;
+}
+
+.category-container {
+    display: inline-flex;
+    background-color: plum;
+    border-radius: 20px;
+    padding: 2px 8px;
+    margin-right: 10px;
+    margin-bottom: 15px;
+}
+
+.filter-category-name {
+    margin: 3px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.close-Button {
+    margin-top: 1px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+}
+
+.filtered-products-list {
+    display: flex;
+    flex-wrap: wrap; /* Esto permite que los elementos pasen a la siguiente fila */
+    justify-content: center;
+}
+
+.individual-product {
+    padding-left: 15px;
+    margin-bottom: 20px; /* Espacio entre filas de elementos */
+}

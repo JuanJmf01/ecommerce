@@ -10,13 +10,13 @@ import camiseta from '../assets/camiseta.png';
 const ProductContainer = styled.div`
     border-radius: ${({ borderRadius }) => borderRadius || '17px'};
     background-color: ${({ backgroundcolor }) => backgroundcolor || 'white'};
-    width: ${({ width }) => width || '180px'};
+    width: ${({ width }) => width || '190px'};
     height: ${({ height }) => height || 'auto'};
 
     transition: width 0.7s ease; 
     
     &:hover {
-        width: 190px;
+        width: ${({ hoverWidth }) => hoverWidth || '200px'};
     }
 `;
 
@@ -26,11 +26,11 @@ const ProductImage = styled.div`
 `;
 
 
-function IndividualProduct({ borderRadius, backgroundcolor, width, height, imageHeight, description }) {
+function IndividualProduct({ borderRadius, backgroundcolor, width, height, imageHeight, description, hoverWidth }) {
 
 
     return (
-        <ProductContainer className='product-container' borderRadius={borderRadius} backgroundcolor={backgroundcolor} width={width} height={height}>
+        <ProductContainer className='product-container' borderRadius={borderRadius} backgroundcolor={backgroundcolor} width={width} height={height} hoverWidth={hoverWidth}>
             <div className='discount'>
                 <p>20%</p>
             </div>

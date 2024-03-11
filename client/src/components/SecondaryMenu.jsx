@@ -3,7 +3,7 @@ import { AiOutlineAlignLeft } from "react-icons/ai";
 
 import './css/secondaryMenu.css';
 
-function SecondaryMenu({ toggleLateralMenu }) {
+function SecondaryMenu({ toggleLateralMenu, withLateralMenu }) {
   const [iconClicked, setIconClicked] = useState(false);
 
   const handleIconClick = () => {
@@ -11,11 +11,14 @@ function SecondaryMenu({ toggleLateralMenu }) {
     toggleLateralMenu(); // Llamar a la funcion para abrir el menu lateral
   };
 
+
+
   return (
     <div className="secondaryMenu">
       <button className='sideMenuButton' onClick={handleIconClick}>
-        <span><AiOutlineAlignLeft /></span>
-        <p>Todo</p>
+        {withLateralMenu ? <span><AiOutlineAlignLeft /></span> : undefined}
+        {withLateralMenu ? <p>Todo</p> : undefined}
+
       </button>
       <ul className='items'>
         <li><a href="/servicio_cliente">Servicio al cliente</a></li>

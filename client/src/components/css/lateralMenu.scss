@@ -1,6 +1,6 @@
 @import '../../constants/variables.scss';
 
-.lateral-menu {
+.hidden-side-menu {
     height: 100vh;
     background-color: white;
     color: black;
@@ -8,7 +8,22 @@
     top: 0;
     left: 0;
     transition: left 1s ease;
-    overflow-y: auto; /* Habilitar el scroll vertical */
+    overflow-y: auto;
+    /* Habilitar el scroll vertical */
+}
+
+
+.lateral-menu {
+    width: 270px;
+}
+
+.overlay-active::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 
@@ -32,7 +47,6 @@
     text-align: center;
 }
 
-
 .close-button {
     background: none;
     border: none;
@@ -45,25 +59,40 @@
     color: black;
 }
 
-.menu-item:hover {
-    background-color: #dddddd;
-}
-
 
 @media screen and (max-width: $large-screen-width) {
-    .lateral-menu {
+
+    .hidden-side-menu {
         width: $small-side-menu;
+    }
+
+    .overlay-active::after {
+        left: $small-side-menu;
     }
 }
 
 @media screen and (max-width: $medium-screen-width) {
-    .lateral-menu {
+
+    .lateral-menu{
+        width: 190px;
+    }
+
+    .hidden-side-menu {
         width: $medium-side-menu;
+    }
+
+    .overlay-active::after {
+        left: $medium-side-menu;
     }
 }
 
 @media screen and (max-width: $small-screen-width) {
-    .lateral-menu {
+
+    .hidden-side-menu {
         width: $large-side-menu;
+    }
+
+    .overlay-active::after {
+        left: $large-side-menu;
     }
 }

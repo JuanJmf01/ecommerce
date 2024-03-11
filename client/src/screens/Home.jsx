@@ -1,7 +1,7 @@
 import ComponenteConTamañoDePantalla from '../constants/ScreenSize';
 import IndividualProduct from '../components/IndividualProduct';
 import SustainableCategoriesContainer from '../components/SustainableCategoriesContainer';
-import { getAllEcologicalCategories } from '../data/services/api/ecologicalCategories.api.js'
+import { getAllEcologicalCategories } from '../data/services/api/ecologicalCategories.api.ts'
 
 import React, { useEffect, useRef, useState } from 'react';
 import { colorWhite, colorPinkLight, colorPink, colorBlueSuperLight, colorBlue, colorPinkSuperLight, colorBlueLight } from '../constants/variables';
@@ -50,7 +50,8 @@ function Home() {
     async function loadEcologicalCategories() {
         try {
             const res = await getAllEcologicalCategories();
-            setEcologicalCategories(res.data);
+            setEcologicalCategories(res);
+
         } catch (error) {
             console.error("Error al cargar categorías ecológicas:", error);
         }
