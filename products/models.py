@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 # Size fot shirts, Tshirts, blouses, breeches, boxers (XS, S, M, L, XL, XXL, XXXL)
 class GeneralSizes(models.Model):
-    idShirtSize = models.AutoField(primary_key=True)    
+    idGeneralSize = models.AutoField(primary_key=True)    
     size = models.CharField(max_length=50)
 
     class Meta:
@@ -31,12 +31,16 @@ class BrasSizes(models.Model):
         db_table = 'BrasSizes'
 
 
+
 class PantsSizes(models.Model):
     idPantSize = models.AutoField(primary_key=True)
     size = models.CharField(max_length=50)
 
     class Meta:
         db_table = 'pantsSizes'
+
+
+
         
 
 # hombre - mujer - niños - niñas - bebes
@@ -72,11 +76,13 @@ class Categories(models.Model):
 
 class Products(models.Model):
     idProduct = models.AutoField(primary_key=True)
+    idUser = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=101)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField(null=True)
-    urlPrincipalImage = models.URLField()
-    imageName = models.CharField(max_length=255)
+    # urlPrincipalImage = models.URLField()
+    # imageName = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='product_image/')
     discount = models.PositiveIntegerField(default = 0, validators=[MinValueValidator(0), MaxValueValidator(100)])  
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -112,9 +118,9 @@ class ProductGenderCategories(models.Model):
 
 
 class ProductGeneralSizes(models.Model):
-    idSubProductShirtSize = models.AutoField(primary_key=True)
+    idProductGeneralSize = models.AutoField(primary_key=True)
     idProduct = models.ForeignKey(Products, on_delete=models.CASCADE)
-    idProductSize = models.ForeignKey(GeneralSizes, on_delete=models.CASCADE)
+    idGeneralSize = models.ForeignKey(GeneralSizes, on_delete=models.CASCADE)
     quantityAvailable = models.PositiveIntegerField()  
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
@@ -122,11 +128,46 @@ class ProductGeneralSizes(models.Model):
         db_table = 'productGeneralSizes'
 
 
+class ProductShoesSizesUS(models.Model):
+    idProductShoesSizeUS= models.AutoField(primary_key=True)
+    idProduct = models.ForeignKey(Products, on_delete=models.CASCADE)
+    idShoeSize = models.ForeignKey(ShoesSizesUS, on_delete=models.CASCADE)
+    quantityAvailable = models.PositiveIntegerField()  
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    class Meta:
+        db_table = 'productShoesSizesUS'
+
+
+class ProductBrasSizes(models.Model):
+    idProductBrasSize= models.AutoField(primary_key=True)
+    idProduct = models.ForeignKey(Products, on_delete=models.CASCADE)
+    idBraSize = models.ForeignKey(BrasSizes, on_delete=models.CASCADE)
+    quantityAvailable = models.PositiveIntegerField()  
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    class Meta:
+        db_table = 'productBrasSizes'
+
+
+class ProductPantsSizes(models.Model):
+    idProductPantSize= models.AutoField(primary_key=True)
+    idProduct = models.ForeignKey(Products, on_delete=models.CASCADE)
+    idPantSize = models.ForeignKey(PantsSizes, on_delete=models.CASCADE)
+    quantityAvailable = models.PositiveIntegerField()  
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    class Meta:
+        db_table = '´productPantsSizes'
+
+
 class ProductImages(models.Model):
     idProductImage = models.AutoField(primary_key=True)
     idProduct = models.ForeignKey(Products, on_delete=models.CASCADE)
-    imageName = models.CharField(max_length=255)
-    urlImage = models.URLField()
+    image = models.ImageField(upload_to='product_images/')
+
+    # imageName = models.CharField(max_length=255)
+    # urlImage = models.URLField()
 
     class Meta:
         db_table = 'productImages'
