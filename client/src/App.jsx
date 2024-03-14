@@ -7,12 +7,16 @@ import Navigation from './components/Navigation'
 import { smallScreenWidth } from "./constants/variables";
 import ComponenteConTamañoDePantalla from './constants/ScreenSize'
 
+
+
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomeNavigation />} />
-        <Route path="/products/:categoryType/:categoryId" element={<ProductsNavigation />} />
+        <Route path="/products/:categoryType/:categoryId/:categoryName" element={<ProductsNavigation />} />
+        <Route path="/products" element={<ProductsNavigation />} />
+
       </Routes>
     </BrowserRouter>
   )

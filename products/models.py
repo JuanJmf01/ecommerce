@@ -2,6 +2,8 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.contrib.auth.models import User
 
+from users.models import Stores
+
 # Create your models here.
 
 # Size fot shirts, Tshirts, blouses, breeches, boxers (XS, S, M, L, XL, XXL, XXXL)
@@ -41,8 +43,6 @@ class PantsSizes(models.Model):
 
 
 
-        
-
 # hombre - mujer - niños - niñas - bebes
 class GenderCategories(models.Model):
     idGenderCategory = models.AutoField(primary_key=True)
@@ -56,13 +56,11 @@ class GenderCategories(models.Model):
 class EcologicalCategories(models.Model):
     idEcologicalCategory = models.AutoField(primary_key=True)
     name = models.CharField(max_length=20) 
-    description = models.TextField(null=True)
+    description = models.TextField()
     # image = models.ImageField(upload_to='ecological_category_images/', null=True, blank=True)
-
 
     class Meta:
         db_table = 'ecologicalCategories'
-
 
 
 # footwear - shirts - T-shirts - blouses - pants - underwear - caps - accessories - coats - sporty - swimwear, etc
@@ -76,7 +74,7 @@ class Categories(models.Model):
 
 class Products(models.Model):
     idProduct = models.AutoField(primary_key=True)
-    idUser = models.ForeignKey(User, on_delete=models.CASCADE)
+    idStore = models.ForeignKey(Stores, on_delete=models.CASCADE)
     name = models.CharField(max_length=101)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField(null=True)

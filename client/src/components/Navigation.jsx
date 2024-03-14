@@ -20,7 +20,7 @@ function Navigation({ withLateralMenu }) {
       <Menu />
       {withLateralMenu ? <SecondaryMenu toggleLateralMenu={toggleLateralMenu} withLateralMenu={withLateralMenu} /> : undefined}
       {isLateralMenuOpen ? <LateralMenu
-        toggleLateralMenu={toggleLateralMenu} withLateralMenu={withLateralMenu}
+        toggleLateralMenu={toggleLateralMenu} withLateralMenu={withLateralMenu} goToProductsDirectly={false}
       /> : undefined}
     </div>
   );

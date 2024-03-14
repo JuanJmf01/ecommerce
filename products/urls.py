@@ -12,3 +12,7 @@ router.register(r'genderCategories', views.GenderCategoriesViews, 'genderCategor
 urlpatterns = [
     path("api/", include(router.urls))
 ]
+
+
+
+

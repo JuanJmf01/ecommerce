@@ -10,19 +10,16 @@ import SecondaryMenu from '../components/SecondaryMenu';
 import { smallScreenWidth, mediumScreenWidth } from '../constants/variables';
 import { useParams } from 'react-router-dom';
 
+import { useCategories } from '../data/services/providers/categoriesContext';
+
 
 import './css/products.scss'
 
 function Products() {
-    const { categoryType, categoryId } = useParams();
-
+    const { categoryType, categoryId, categoryName } = useParams();
+    const { categories, ecologicalCategories, genderCategories, addCategory, deleteCategory } = useCategories();
     const screenSize = ComponenteConTamañoDePantalla();
-
     const [isLateralMenuOpen, setIsLateralMenuOpen] = useState(false);
-    const [categories, setCategories] = useState([]);
-    const [ecologicalCategory, setEcologicalCategory] = useState([]);
-    const [genderCategories, setGenderCategories] = useState([]);
-
 
     let width = screenSize.screenWidth > smallScreenWidth ? '220px' : '180px'
     let withLateralMenu = screenSize.screenWidth > smallScreenWidth ? false : true
@@ -31,51 +28,31 @@ function Products() {
         width = '170px'
     }
 
-    const handleSelectCategory = (category) => {
-        console.log(categoryType)
-        console.log(categoryId)
-        console.log(category)
-
-        if (categoryType === 'category') {
-            setCategories([...categories, category]);
-            console.log(categories)
-
-        }
-        // } else if (categoryType === 'ecological') {
-        //     setEcologicalCategory([...ecologicalCategory, category]);
-        // } else if (categoryType === 'gender') {
-        //     setGenderCategories([...genderCategories, category]);
-        // }
-    };
-
-
     const toggleLateralMenu = () => {
         setIsLateralMenuOpen(!isLateralMenuOpen);
     };
 
     useEffect(() => {
-        console.log(categoryType)
-        console.log(categoryId)
+        addCategory(categoryType, { id: categoryId, name: categoryName });
+    }, [categoryType, categoryId, categoryName]);
 
-        const category = {
-            "id": categoryId,
-            "name": categoryType
-        };
+    const handleDeleteCategory = (type, id) => {
+        deleteCategory(type, id);
+    };
 
-        handleSelectCategory(category)
-    }, []);
+
 
     return (
-
         <div>
             <SecondaryMenu toggleLateralMenu={toggleLateralMenu} withLateralMenu={withLateralMenu} />
             <div className='container'>
                 {screenSize.screenWidth > smallScreenWidth
-                    ? <LateralMenu withLateralMenu={false} onSelectCategory={handleSelectCategory} />
+                    ? <LateralMenu withLateralMenu={false} goToProductsDirectly={true} />
                     : undefined}
 
                 {isLateralMenuOpen ? <LateralMenu
-                    toggleLateralMenu={toggleLateralMenu} withLateralMenu={true} onSelectCategory={handleSelectCategory}
+                    toggleLateralMenu={toggleLateralMenu} withLateralMenu={true} goToProductsDirectly={true}
+
                 /> : undefined}
 
                 <div className='search-products-content'>
@@ -83,12 +60,27 @@ function Products() {
                         {categories.map((category, index) => (
                             <div key={index} className='category-container'>
                                 <p className='filter-category-name'>{category.name}</p>
-                                <button className='close-Button'>
+                                <button className='close-Button' onClick={() => handleDeleteCategory('category', category.id)}>
                                     <IoClose />
                                 </button>
                             </div>
-                        ))
-                        }
+                        ))}
+                        {ecologicalCategories.map((category, index) => (
+                            <div key={index} className='category-container'>
+                                <p className='filter-category-name'>{category.name}</p>
+                                <button className='close-Button' onClick={() => handleDeleteCategory('ecological', category.id)}>
+                                    <IoClose />
+                                </button>
+                            </div>
+                        ))}
+                        {genderCategories.map((category, index) => (
+                            <div key={index} className='category-container'>
+                                <p className='filter-category-name'>{category.name}</p>
+                                <button className='close-Button' onClick={() => handleDeleteCategory('gender', category.id)}>
+                                    <IoClose />
+                                </button>
+                            </div>
+                        ))}
                     </div>
                     <div className='filtered-products-list'>
                         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item, index) => (
@@ -100,8 +92,6 @@ function Products() {
                 </div>
             </div>
         </div>
-
-
     );
 }
 
