@@ -35,59 +35,29 @@ function LateralMenu({ toggleLateralMenu, withLateralMenu, goToProductsDirectly 
     const [allGeneralCategories, setCategories] = useState([]);
     const [allEcologicalcategories, setEcologicalCategories] = useState([]);
     const [allGendercategories, setGenderCategories] = useState([]);
-    const navigate = useNavigate();
 
-    const { categories, ecologicalCategories, genderCategories, deleteCategory } = useCategories();
 
-    async function loadCategories() {
-        try {
-            const res = await getAllCategories();
-            setCategories(res.data);
-        } catch (error) {
-            console.error("Error al cargar categorías:", error);
-        }
-    }
-
-    async function loadEcologicalCategories() {
-        try {
-            const res = await getAllEcologicalCategories();
-            setEcologicalCategories(res);
-        } catch (error) {
-            console.error("Error al cargar categorías ecológicas:", error);
-        }
-    }
-
-    async function loadGenderCategories() {
-        try {
-            const res = await getAllGenderCategories();
-            setGenderCategories(res.data);
-        } catch (error) {
-            console.error("Error al cargar las categorias por segmento:", error);
-        }
-    }
-
-    const clearAllCategories = () => {
-        categories.forEach(category => deleteCategory('category', category.id));
-        ecologicalCategories.forEach(category => deleteCategory('ecological', category.id));
-        genderCategories.forEach(category => deleteCategory('gender', category.id));
-    };
 
     useEffect(() => {
+        async function fetchData() {
+            try {
+                const generalRes = await getAllCategories();
+                const ecologicalRes = await getAllEcologicalCategories();
+                const genderRes = await getAllGenderCategories();
 
-        clearAllCategories()
-
-        loadCategories();
-        loadEcologicalCategories();
-        loadGenderCategories();
-    }, []);
-
-    useEffect(() => {
-        if (goToProductsDirectly) {
-            if (!categories.length && !ecologicalCategories.length && !genderCategories.length) {
-                navigate('/products');
+                setCategories(generalRes.data);
+                setEcologicalCategories(ecologicalRes);
+                setGenderCategories(genderRes.data);
+            } catch (error) {
+                console.error("Error al cargar categorías:", error);
             }
         }
-    }, [categories, ecologicalCategories, genderCategories, navigate]);
+
+        fetchData();
+    }, []);
+
+
+
 
     const handleIconClick = () => {
         setIconClicked(!iconClicked);
@@ -106,7 +76,7 @@ function LateralMenu({ toggleLateralMenu, withLateralMenu, goToProductsDirectly 
                 ) : undefined}
 
                 <h3 className='menu-subTitle'>Contenido</h3>
-                {/* Categories list */}
+                {/* Categories list que se estan mostrando */}
                 {allGeneralCategories && allGeneralCategories.map((category) => (
                     <MenuItem key={category.idCategory}>
                         <Link to={`/products/category/${category.idCategory}/${category.name}`} onClick={toggleLateralMenu}>
@@ -115,7 +85,7 @@ function LateralMenu({ toggleLateralMenu, withLateralMenu, goToProductsDirectly 
                     </MenuItem>
                 ))}
                 <h3 className="menu-subTitle">Seleccion sostenible</h3>
-                {/* List of sustainable categories */}
+                {/* List of sustainable categories que se estan mostrando */}
                 {allEcologicalcategories && allEcologicalcategories.map((category) => (
                     <MenuItem key={category.idEcologicalCategory}>
                         <Link to={`/products/ecological/${category.idEcologicalCategory}/${category.name}`} onClick={toggleLateralMenu}>
@@ -125,7 +95,7 @@ function LateralMenu({ toggleLateralMenu, withLateralMenu, goToProductsDirectly 
                 ))}
 
                 <h3 className="menu-subTitle">Seleccion por segmento</h3>
-                {/* List of categories by gender */}
+                {/* List of categories by gender que se estan mostrando*/}
                 {allGendercategories && allGendercategories.map((category) => (
                     <MenuItem key={category.idGenderCategory}>
                         <Link to={`/products/gender/${category.idGenderCategory}/${category.name}`} onClick={toggleLateralMenu}>

@@ -26,20 +26,35 @@ export const CategoriesProvider = ({ children }) => {
     };
 
     const deleteCategory = (type, id) => {
+        let isEmpty = false;
         switch (type) {
             case 'category':
-                setCategories(prevCategories => prevCategories.filter(category => category.id !== id));
+                setCategories(prevCategories => {
+                    const newCategories = prevCategories.filter(category => category.id !== id);
+                    isEmpty = newCategories.length === 0 && ecologicalCategories.length === 0 && genderCategories.length === 0;
+                    return newCategories;
+                });
                 break;
             case 'ecological':
-                setEcologicalCategories(prevCategories => prevCategories.filter(category => category.id !== id));
+                setEcologicalCategories(prevCategories => {
+                    const newCategories = prevCategories.filter(category => category.id !== id);
+                    isEmpty = categories.length === 0 && newCategories.length === 0 && genderCategories.length === 0;
+                    return newCategories;
+                });
                 break;
             case 'gender':
-                setGenderCategories(prevCategories => prevCategories.filter(category => category.id !== id));
+                setGenderCategories(prevCategories => {
+                    const newCategories = prevCategories.filter(category => category.id !== id);
+                    isEmpty = categories.length === 0 && ecologicalCategories.length === 0 && newCategories.length === 0;
+                    return newCategories;
+                });
                 break;
             default:
                 break;
         }
+        return isEmpty;
     };
+
 
     return (
         <CategoriesContext.Provider value={{ categories, ecologicalCategories, genderCategories, addCategory, deleteCategory }}>

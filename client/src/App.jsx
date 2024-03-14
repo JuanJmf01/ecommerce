@@ -14,8 +14,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomeNavigation />} />
-        <Route path="/products/:categoryType/:categoryId/:categoryName" element={<ProductsNavigation />} />
         <Route path="/products" element={<ProductsNavigation />} />
+        <Route path="/products/:categoryType/:categoryId/:categoryName" element={<ProductsNavigation />} />
 
       </Routes>
     </BrowserRouter>
@@ -32,11 +32,8 @@ function HomeNavigation() {
   );
 }
 
+
 function ProductsNavigation() {
-
-  const screenSize = ComponenteConTamañoDePantalla();
-
-
   return (
     <>
       <Navigation withLateralMenu={false} />

@@ -8,9 +8,11 @@ import ComponenteConTamañoDePantalla from '../constants/ScreenSize'
 import SecondaryMenu from '../components/SecondaryMenu';
 
 import { smallScreenWidth, mediumScreenWidth } from '../constants/variables';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import { useCategories } from '../data/services/providers/categoriesContext';
+
+import { getAllProducts, getProductsByCategory, getProductsByEcologicalCategory, getProductsByGenderCategory } from '../data/services/api/products.api'
 
 
 import './css/products.scss'
@@ -20,26 +22,90 @@ function Products() {
     const { categories, ecologicalCategories, genderCategories, addCategory, deleteCategory } = useCategories();
     const screenSize = ComponenteConTamañoDePantalla();
     const [isLateralMenuOpen, setIsLateralMenuOpen] = useState(false);
+    const [products, setProducts] = useState([]);
+    const navigate = useNavigate();
 
     let width = screenSize.screenWidth > smallScreenWidth ? '220px' : '180px'
     let withLateralMenu = screenSize.screenWidth > smallScreenWidth ? false : true
 
+
     if (screenSize.screenWidth > smallScreenWidth && screenSize.screenWidth <= mediumScreenWidth) {
         width = '170px'
+    }
+
+    async function loadAllProducts() {
+        try {
+            const res = await getAllProducts();
+            setProducts(res.data);
+            console.log(res.data)
+
+        } catch (error) {
+            console.error("Error al cargar categorías ecológicas:", error);
+        }
+    }
+
+    async function loadProductsByCategories(idCategory) {
+        try {
+            const res = await getProductsByCategory(idCategory);
+            setProducts(res.data);
+        } catch (error) {
+            console.error("Error al cargar categorías ecológicas:", error);
+        }
+    }
+
+
+    async function loadProductsByEcologicalCategories(idCategory) {
+        try {
+            const res = await getProductsByEcologicalCategory(idCategory);
+            setProducts(res.data);
+        } catch (error) {
+            console.error("Error al cargar categorías ecológicas:", error);
+        }
+    }
+
+    async function loadProductsByGenderCategories(idCategory) {
+        try {
+            const res = await getProductsByGenderCategory(idCategory);
+            setProducts(res.data);
+            console.log(res.data)
+        } catch (error) {
+            console.error("Error al cargar categorías ecológicas:", error);
+        }
     }
 
     const toggleLateralMenu = () => {
         setIsLateralMenuOpen(!isLateralMenuOpen);
     };
 
+
+
     useEffect(() => {
         addCategory(categoryType, { id: categoryId, name: categoryName });
+
     }, [categoryType, categoryId, categoryName]);
 
     const handleDeleteCategory = (type, id) => {
-        deleteCategory(type, id);
+        const areAllCategoriesEmpty = deleteCategory(type, id);
+        if (areAllCategoriesEmpty) {
+            navigate('/products')
+            loadAllProducts()
+        }
     };
 
+
+    useEffect(() => {
+        if (categories.length > 0) {
+            loadProductsByCategories(categories[0].id)
+        }
+        if (ecologicalCategories.length > 0) {
+            loadProductsByEcologicalCategories(ecologicalCategories[0].id)
+        }
+        if (genderCategories.length > 0) {
+            loadProductsByGenderCategories(genderCategories[0].id)
+        }
+
+
+    }, [categories, ecologicalCategories, genderCategories]);
 
 
     return (
@@ -47,11 +113,11 @@ function Products() {
             <SecondaryMenu toggleLateralMenu={toggleLateralMenu} withLateralMenu={withLateralMenu} />
             <div className='container'>
                 {screenSize.screenWidth > smallScreenWidth
-                    ? <LateralMenu withLateralMenu={false} goToProductsDirectly={true} />
+                    ? <LateralMenu withLateralMenu={false} />
                     : undefined}
 
                 {isLateralMenuOpen ? <LateralMenu
-                    toggleLateralMenu={toggleLateralMenu} withLateralMenu={true} goToProductsDirectly={true}
+                    toggleLateralMenu={toggleLateralMenu} withLateralMenu={true}
 
                 /> : undefined}
 
@@ -83,7 +149,7 @@ function Products() {
                         ))}
                     </div>
                     <div className='filtered-products-list'>
-                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item, index) => (
+                        {products.map((product, index) => (
                             <div key={index} className='individual-product'>
                                 <IndividualProduct width={width} hoverWidth={width} description="English. Many desktop publishing packages and web page editors now use" />
                             </div>
