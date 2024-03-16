@@ -151,7 +151,15 @@ function Products() {
                     <div className='filtered-products-list'>
                         {products.map((product, index) => (
                             <div key={index} className='individual-product'>
-                                <IndividualProduct width={width} hoverWidth={width} description="English. Many desktop publishing packages and web page editors now use" />
+                                <IndividualProduct 
+                                width={width} 
+                                hoverWidth={width} 
+                                name = { product.name } 
+                                description = { product.description }
+                                price = { product.price } 
+                                discount={ product.discount }
+                                
+                                />
                             </div>
                         ))}
                     </div>

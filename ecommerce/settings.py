@@ -37,10 +37,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',            #new
-    'rest_framework',         #new
-    'products',               #new
-    'users',               #new
+    'corsheaders',            
+    'rest_framework', 
+    'rest_framework.authtoken',        
+    'products',                        
+    'users.apps.UsersConfig',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
+
+
 ]
 
 MIDDLEWARE = [
@@ -91,7 +100,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ecommerce',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': '1922',
         'HOST': 'localhost',  # Puede variar según la configuracion de tu servidor MySQL
         'PORT': '',           # Deja en blanco para usar el puerto predeterminado
     }
@@ -140,3 +149,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # cors authorization
 CORS_ALLOWED_ORIGINS = ['http://localhost:5173']
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+    ]
+}
+
+SITE_ID = 1  # make sure SITE_ID is set

@@ -1,8 +1,11 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
 from .serializer import EcologicalCategorySerializer, CategorySerializer, GenderCategoriesSerializer, ProductSerializer
 from .models import *
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+import re
+from django.db.models import Q
+
 
 
 class EcologicalCategoriesView(viewsets.ModelViewSet):
@@ -19,9 +22,24 @@ class GenderCategoriesViews(viewsets.ModelViewSet):
     queryset = GenderCategories.objects.all()
 
 
+
+
 class ProductView(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     queryset = Products.objects.all()
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name', 'description', 'idProduct']
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        search_query = self.request.query_params.get('search', None)
+        if search_query:
+            queryset = queryset.filter(
+                Q(name__icontains=search_query) |
+                Q(description__icontains=search_query)
+            )
+        return queryset
+
 
 
 @api_view(['GET'])

@@ -26,7 +26,7 @@ const ProductImage = styled.div`
 `;
 
 
-function IndividualProduct({ borderRadius, backgroundcolor, width, height, imageHeight, description, hoverWidth }) {
+function IndividualProduct({ borderRadius, backgroundcolor, width, height, imageHeight, description, name, price, discount , hoverWidth }) {
 
 
     return (
@@ -38,14 +38,15 @@ function IndividualProduct({ borderRadius, backgroundcolor, width, height, image
                 <img src={camiseta} />
             </ProductImage>
             <div className='product-info'>
-                <p className='product-name'>Nombre del producto</p>
+                <p className='product-name'>{name}</p>
                 {description !== null && description !== undefined ? (
                     <p className='product-description'>{description}</p>
                 ) : null}
+
                 <div className='price-cart-container'>
-                    <div className='price-container'>
-                        <p className='previous-price'>$54.99</p>
-                        <p className='current-price'>$32.99</p>
+                <div className='price-container'>
+                        {discount != 0 ? <p className='previous-price'>$54.99</p> : undefined}
+                        <p className='current-price'>{price}</p>
                     </div>
                     <div className='cart-button'>
                         <ButtonIconContainer
