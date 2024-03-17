@@ -28,4 +28,7 @@ export const getProductsByGenderCategory = (idCategory) => {
     return res;
 }
 
-
+export const getProductsByKeyword = (keyword) => {
+    const res = productsApiProducts.get(`/?search=${keyword}`)
+    return res;
+}

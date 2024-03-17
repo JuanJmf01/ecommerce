@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Menu from "./Menu";
 import SecondaryMenu from "./SecondaryMenu";
 import LateralMenu from "./LateralMenu";
+import ProductSearch from './ProductSearch';
 import styled from 'styled-components';
 
 
@@ -22,7 +23,9 @@ function Navigation({ withLateralMenu }) {
       {isLateralMenuOpen ? <LateralMenu
         toggleLateralMenu={toggleLateralMenu} withLateralMenu={withLateralMenu} goToProductsDirectly={false}
       /> : undefined}
+      <ProductSearch />
     </div>
+    
   );
 }
 

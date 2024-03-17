@@ -157,3 +157,5 @@ REST_FRAMEWORK = {
 }
 
 SITE_ID = 1  # make sure SITE_ID is set
+
+
