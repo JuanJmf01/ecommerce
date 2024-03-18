@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-2azehlmd3iiq=y6hjw4s@bf+ht!b@wd@he4ye@y06(3zb_pm1p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['34.71.221.121']
+ALLOWED_HOSTS = ['34.171.181.242', 'localhost']
 
 
 # Application definition
@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'corsheaders',            
     'rest_framework', 
     'rest_framework.authtoken',        
-    'products',                        
+    'products',
     'users.apps.UsersConfig',
     'django.contrib.sites',
     'allauth',
@@ -48,8 +48,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'dj_rest_auth',
     'dj_rest_auth.registration',
-
-
 ]
 
 MIDDLEWARE = [
@@ -97,16 +95,6 @@ DATABASES = {
 }
 
 # new
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'ecommerce',
-#         'USER': 'root',
-#         'PASSWORD': '1922',
-#         'HOST': 'localhost',  # Puede variar según la configuracion de tu servidor MySQL
-#         'PORT': '',           # Deja en blanco para usar el puerto predeterminado
-#     }
-# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -142,7 +130,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -150,7 +138,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # cors authorization
-CORS_ALLOWED_ORIGINS = ['http://localhost:5173']
+CORS_ALLOWED_ORIGINS = ['http://localhost:5173', 'http://34.171.181.242:3000']
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
@@ -159,5 +147,3 @@ REST_FRAMEWORK = {
 }
 
 SITE_ID = 1  # make sure SITE_ID is set
-
-
