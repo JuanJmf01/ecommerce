@@ -30,7 +30,7 @@ class BrasSizes(models.Model):
     size = models.CharField(max_length=15)
 
     class Meta:
-        db_table = 'BrasSizes'
+        db_table = 'brasSizes'
 
 
 

@@ -158,7 +158,6 @@ function Products() {
                                 description = { product.description }
                                 price = { product.price } 
                                 discount={ product.discount }
-                                
                                 />
                             </div>
                         ))}

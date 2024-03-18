@@ -25,8 +25,27 @@ const ProductImage = styled.div`
     height: ${props => props.height};
 `;
 
+const PreviusPricce = styled.p`
+    text-decoration: line-through;
+`;
 
-function IndividualProduct({ borderRadius, backgroundcolor, width, height, imageHeight, description, name, price, discount , hoverWidth }) {
+
+function IndividualProduct({ borderRadius, backgroundcolor, width, height, imageHeight, description, name, price, discount, hoverWidth }) {
+
+
+    function priceWithDiscount() {
+        // Verificar que el descuento esté en el rango correcto (0-100)
+        if (discount < 0 || discount > 100) {
+            return "El descuento debe estar entre 0 y 100.";
+        }
+        // Calcular el monto de descuento
+        var montoDescuento = price * (discount / 100);
+        // Calcular el precio con descuento
+        var precioConDescuento = price - montoDescuento;
+        // Devolver el precio con descuento
+        return precioConDescuento;
+    }
+
 
 
     return (
@@ -44,10 +63,15 @@ function IndividualProduct({ borderRadius, backgroundcolor, width, height, image
                 ) : null}
 
                 <div className='price-cart-container'>
-                <div className='price-container'>
-                        {discount != 0 ? <p className='previous-price'>$54.99</p> : undefined}
-                        <p className='current-price'>{price}</p>
-                    </div>
+                    {discount !== 0 ?
+                        <div className='price-container'>
+                            <PreviusPricce className='previous-price'>{price}</PreviusPricce>
+                            <p className='current-price'>${priceWithDiscount()}</p>
+                        </div> :
+                        <div className='price-container'>
+                            <p className='current-price'>{price}</p>
+                        </div>
+                    }
                     <div className='cart-button'>
                         <ButtonIconContainer
                             backgroundcontainer={colorBlack}
