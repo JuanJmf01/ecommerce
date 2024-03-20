@@ -9,6 +9,13 @@ router.register(r'products', views.ProductView, 'products')
 router.register(r'ecologicalCategories', views.EcologicalCategoriesView, 'ecologicalCategories')
 router.register(r'categories', views.CategoriesViews, 'categories')
 router.register(r'genderCategories', views.GenderCategoriesViews, 'genderCategories')
+router.register(r'productCategories', views.ProductCategoriesViews, 'productCategories')
+router.register(r'productEcologicalCategories', views.ProductEcologicalCategoriesViews, 'productEcologicalCategories')
+router.register(r'productGenderCategories', views.ProductGenderCategoriesViews, 'productGenderCategories')
+router.register(r'productGeneralSizes', views.ProductGeneralSizesViews, 'productGeneralSizes')
+router.register(r'productShoesSizesUS', views.ProductShoesSizesUSViews, 'productShoesSizesUS')
+router.register(r'productBrasSizes', views.ProductBrasSizesViews, 'productBrasSizes')
+router.register(r'productPantsSizesViews', views.ProductPantsSizesViews, 'productPantsSizesViews')
 
 urlpatterns = [
     path("api/", include(router.urls)),

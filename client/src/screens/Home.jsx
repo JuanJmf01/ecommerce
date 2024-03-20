@@ -2,6 +2,7 @@ import ComponenteConTamañoDePantalla from '../constants/ScreenSize';
 import IndividualProduct from '../components/IndividualProduct';
 import SustainableCategoriesContainer from '../components/SustainableCategoriesContainer';
 import { getAllEcologicalCategories } from '../data/services/api/ecologicalCategories.api.ts'
+import { getAllProducts } from '../api/products.api';
 
 import React, { useEffect, useRef, useState } from 'react';
 import { colorWhite, colorPinkLight, colorPink, colorBlueSuperLight, colorBlue, colorPinkSuperLight, colorBlueLight } from '../constants/variables';
@@ -9,6 +10,7 @@ import { colorWhite, colorPinkLight, colorPink, colorBlueSuperLight, colorBlue, 
 
 import './css/home.scss';
 import GlobalLinkContainer from '../components/globalLinkContainer.jsx';
+
 
 
 
@@ -47,21 +49,46 @@ function Home() {
         categoriesListRef.current.scrollLeft = scrollLeft - walk;
     };
 
-    async function loadEcologicalCategories() {
-        try {
-            const res = await getAllEcologicalCategories();
-            setEcologicalCategories(res);
+    const [products, setProducts] = useState([]); // Agregar esta línea
 
-        } catch (error) {
-            console.error("Error al cargar categorías ecológicas:", error);
+    const getTopDiscountProducts = () => {
+        const sortedProducts = [...products].sort((a, b) => b.discount - a.discount);
+        return sortedProducts.slice(0, 4);
+    };
+    
+
+    useEffect(() => { // Agregar esta función useEffect
+        async function loadEcologicalCategories() {
+            try {
+                const res = await getAllEcologicalCategories();
+                setEcologicalCategories(res);
+    
+            } catch (error) {
+                console.error("Error al cargar categorías ecológicas:", error);
+            }
         }
-    }
 
+        async function loadProducts() {
+          try {
+            const res = await getAllProducts();
+            setProducts(res.data);
+            console.log(res);
+          } catch (error) {
+            console.error("Error al cargar productos:", error);
+          }
+        }
+        loadProducts();
+        loadEcologicalCategories()
+      }, []);
+
+
+    /*
     useEffect(() => {
 
         loadEcologicalCategories()
 
     }, [])
+    */
 
     return (
         <div>
@@ -69,7 +96,16 @@ function Home() {
                 <div className='home-content-container'>
                     <div className="discount-products">
                         <h3 className='discount-products-title'>Productos con descuento</h3>
-                        <div className="discount-product-list">
+
+                        <div className="discount-product-list" style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
+                            {getTopDiscountProducts().map((product, index) => (
+                                <div key={index} className="individual-product" style={{ display: 'inline-block', marginRight: '10px' }}>
+                                    <IndividualProduct products={product} />
+                                </div>
+                            ))}
+                        </div>
+                        
+                    {/* <div className="discount-product-list">
                             {[1, 2, 3, 4].map((index) => (
                                 <div key={index} className={`discount-products-content ${index === 1 ? 'primer-elemento' : ''}`}>
                                     {screenSize.screenWidth > 800 ?
@@ -86,7 +122,9 @@ function Home() {
                                     }
                                 </div>
                             ))}
-                        </div>
+                        </div> */}
+
+
                         <div className='discount-store-button'>
                             <GlobalLinkContainer name="Open store" color={colorBlueLight} hoverColor={colorBlue}/>
                         </div>
@@ -108,14 +146,14 @@ function Home() {
                                         ? index % 6 === 0 || index === 0
                                             ? <SustainableCategoriesContainer
                                                 background={colorBlueSuperLight}
-                                                borderColor={colorBlue}
+                                                bordercolor={colorBlue}
                                                 iconcolor={colorBlue}
                                                 name={category.name}
                                                 description={category.description} />
                                             : index !== 1 && index % 2 !== 0
                                                 ? < SustainableCategoriesContainer
                                                     background={colorPinkSuperLight}
-                                                    borderColor={colorPink}
+                                                    bordercolor={colorPink}
                                                     iconcolor={colorPink}
                                                     name={category.name}
                                                     description={category.description} />
@@ -127,7 +165,7 @@ function Home() {
                                                 width={widthContainerCategory}
                                                 height={heightContainerCategory}
                                                 background={colorBlueSuperLight}
-                                                borderColor={colorBlue}
+                                                bordercolor={colorBlue}
                                                 iconcolor={colorBlue}
                                                 name={category.name}
                                                 description={category.description} />
@@ -136,7 +174,7 @@ function Home() {
                                                     width={widthContainerCategory}
                                                     height={heightContainerCategory}
                                                     background={colorPinkSuperLight}
-                                                    borderColor={colorPink}
+                                                    bordercolor={colorPink}
                                                     iconcolor={colorPink}
                                                     name={category.name}
                                                     description={category.description} />
@@ -160,10 +198,11 @@ function Home() {
                     </div>
                     <div className='products-content'>
                         <h3>All products</h3>
-                        <div className='product-list'>
-                            {[1, 2, 3, 4].map((item, index) => (
-                                <div key={index} className='individual-product'>
-                                    <IndividualProduct description="English. Many desktop publishing packages and web page editors now use" />
+                        
+                        <div className="product-list" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
+                            {products.slice(-8).map((product, index) => (
+                                <div key={index} className="individual-product">
+                                    <IndividualProduct products={product} />
                                 </div>
                             ))}
                         </div>

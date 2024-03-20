@@ -1,11 +1,11 @@
-import React from 'react';
+import './css/individualProduct.scss'
 import styled from 'styled-components';
 import { PiShoppingCart } from "react-icons/pi";
 import { colorBlack } from '../constants/variables';
+
 import ButtonIconContainer from './ButtonIconContainer';
 import camiseta from '../assets/camiseta.png';
 
-import './css/individualProduct.scss';
 
 const ProductContainer = styled.div`
     border-radius: ${({ borderRadius }) => borderRadius || '17px'};
@@ -25,29 +25,28 @@ const ProductImage = styled.div`
     height: ${props => props.height};
 `;
 
-function IndividualProduct({ borderRadius, backgroundcolor, width, height, imageHeight, products, hoverWidth }) {
-    if (!products) {
-        return null; // O manejar el caso en que product es undefined
-    }
+
+function IndividualProduct({ borderRadius, backgroundcolor, width, height, imageHeight, description, name, price, discount , hoverWidth }) {
+
 
     return (
         <ProductContainer className='product-container' borderRadius={borderRadius} backgroundcolor={backgroundcolor} width={width} height={height} hoverWidth={hoverWidth}>
             <div className='discount'>
-                <p>{products.discount}%</p>
+                <p>20%</p>
             </div>
             <ProductImage className='product-image' height={imageHeight || '130px'}>
-                <img src={camiseta} alt="Product" />
+                <img src={camiseta} />
             </ProductImage>
             <div className='product-info'>
-                <p className='product-name'>{products.name}</p>
-                {products.description !== null && products.description !== undefined ? (
-                    <p className='product-description'>{products.description}</p>
+                <p className='product-name'>{name}</p>
+                {description !== null && description !== undefined ? (
+                    <p className='product-description'>{description}</p>
                 ) : null}
 
                 <div className='price-cart-container'>
-                    <div className='price-container'>
-                        {products.discount !== 0 ? <p className='previous-price'>$54.00</p> : undefined}
-                        <p className='current-price'>${products.price}</p>
+                <div className='price-container'>
+                        {discount != 0 ? <p className='previous-price'>$54.99</p> : undefined}
+                        <p className='current-price'>{price}</p>
                     </div>
                     <div className='cart-button'>
                         <ButtonIconContainer
@@ -58,7 +57,9 @@ function IndividualProduct({ borderRadius, backgroundcolor, width, height, image
                     </div>
                 </div>
             </div>
+
         </ProductContainer>
+
     );
 }
 

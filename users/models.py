@@ -11,3 +11,6 @@ class Stores(models.Model):
 
     class Meta:
         db_table = 'stores'
+
+    def __str__(self):
+        return self.name

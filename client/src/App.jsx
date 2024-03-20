@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Home from "./screens/Home"
 import Products from "./screens/Products";
+import ProductsForm from "./screens/ProductsForm";
 
 import Navigation from './components/Navigation'
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<HomeNavigation />} />
         <Route path="/products" element={<ProductsNavigation />} />
         <Route path="/products/:categoryType/:categoryId/:categoryName" element={<ProductsNavigation />} />
+        <Route path="/products-create" element={<ProductsFormNavigation />} />
 
       </Routes>
     </BrowserRouter>
@@ -42,5 +44,13 @@ function ProductsNavigation() {
   );
 }
 
+function ProductsFormNavigation() {
+  return (
+    <>
+      <Navigation withLateralMenu={false} />
+      <ProductsForm />
+    </>
+  );
+}
 
 export default App

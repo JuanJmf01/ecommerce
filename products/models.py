@@ -6,13 +6,16 @@ from users.models import Stores
 
 # Create your models here.
 
-# Size fot shirts, Tshirts, blouses, breeches, boxers (XS, S, M, L, XL, XXL, XXXL)
+# Size fot shirts, T-shirts, blouses, breeches, boxers (XS, S, M, L, XL, XXL, XXXL)
 class GeneralSizes(models.Model):
     idGeneralSize = models.AutoField(primary_key=True)    
     size = models.CharField(max_length=50)
 
     class Meta:
         db_table = 'generalSizes'
+
+    def __str__(self):
+        return self.size
 
 
 # (38, 39, 39.5, 40, 40.5, 41, 42, 42.5, 43, 43.5, 44, 45, 46, 47, 48, 49, 50, 51)
@@ -23,6 +26,9 @@ class ShoesSizesUS(models.Model):
     class Meta:
         db_table = 'shoesSizes'
 
+    def __str__(self):
+        return self.size
+
 
 # Sujetadores (30A, 30B, 30C, 30D, 32A, 32B, 32C, 32D, 34A, 34B, 34C, 34D, 36A, 36B, 36C, 36D, 38A, 38B, 38C, 38D)
 class BrasSizes(models.Model):
@@ -32,6 +38,9 @@ class BrasSizes(models.Model):
     class Meta:
         db_table = 'BrasSizes'
 
+    def __str__(self):
+        return self.size
+
 
 
 class PantsSizes(models.Model):
@@ -40,6 +49,9 @@ class PantsSizes(models.Model):
 
     class Meta:
         db_table = 'pantsSizes'
+    
+    def __str__(self):
+        return self.size
 
 
 
@@ -50,6 +62,11 @@ class GenderCategories(models.Model):
 
     class Meta:
         db_table = 'genderCategories'
+
+    def __str__(self):
+        return self.name
+
+
        
 
 # oganica, reciclable - fibra natual - vegana - biodegradable - comercio justo - certificada
@@ -62,6 +79,9 @@ class EcologicalCategories(models.Model):
     class Meta:
         db_table = 'ecologicalCategories'
 
+    def __str__(self):
+        return self.name
+
 
 # footwear - shirts - T-shirts - blouses - pants - underwear - caps - accessories - coats - sporty - swimwear, etc
 class Categories(models.Model):
@@ -70,6 +90,9 @@ class Categories(models.Model):
 
     class Meta:
         db_table = 'categories'
+    
+    def __str__(self):
+        return self.name
 
 
 class Products(models.Model):
@@ -86,6 +109,9 @@ class Products(models.Model):
 
     class Meta:
         db_table = 'products'
+    
+    def __str__(self):
+        return self.name
 
 
 class ProductCategories(models.Model):

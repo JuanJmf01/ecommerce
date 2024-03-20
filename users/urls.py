@@ -5,6 +5,16 @@ from dj_rest_auth.views import LoginView, LogoutView, UserDetailsView
 
 router = routers.DefaultRouter()
 # Agrega tus rutas con router.register()
+from rest_framework.routers import DefaultRouter
+from .views import StoreView
+
+router = DefaultRouter()
+router.register(r'stores', StoreView)
+
+urlpatterns = [
+    path('api/', include(router.urls)),
+]
+
 
 urlpatterns = [
     path('api/', include(router.urls)),  # Incluye las URL generadas por el router

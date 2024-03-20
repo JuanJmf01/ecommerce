@@ -1,167 +1,118 @@
-import LateralMenu from '../components/LateralMenu';
-import React, { useState, useEffect } from 'react';
-import { IoClose } from "react-icons/io5";
-
+import ComponenteConTamañoDePantalla from '../constants/ScreenSize';
 import IndividualProduct from '../components/IndividualProduct';
-import ComponenteConTamañoDePantalla from '../constants/ScreenSize'
+import SustainableCategoriesContainer from '../components/SustainableCategoriesContainer';
+import { getAllEcologicalCategories } from '../data/services/api/ecologicalCategories.api.ts'
+import { getAllProducts } from '../api/products.api';
 
-import SecondaryMenu from '../components/SecondaryMenu';
-
-import { smallScreenWidth, mediumScreenWidth } from '../constants/variables';
-import { useParams, useNavigate } from 'react-router-dom';
-
-import { useCategories } from '../data/services/providers/categoriesContext';
-
-import { getAllProducts, getProductsByCategory, getProductsByEcologicalCategory, getProductsByGenderCategory } from '../data/services/api/products.api'
+import React, { useEffect, useRef, useState } from 'react';
+import { colorWhite, colorPinkLight, colorPink, colorBlueSuperLight, colorBlue, colorPinkSuperLight, colorBlueLight } from '../constants/variables';
 
 
-import './css/products.scss'
+import './css/products.scss';
+import GlobalLinkContainer from '../components/globalLinkContainer.jsx';
+
+
+
 
 function Products() {
-    const { categoryType, categoryId, categoryName } = useParams();
-    const { categories, ecologicalCategories, genderCategories, addCategory, deleteCategory } = useCategories();
+    const widthContainerCategory = '140px';
+    const heightContainerCategory = '180px';
     const screenSize = ComponenteConTamañoDePantalla();
-    const [isLateralMenuOpen, setIsLateralMenuOpen] = useState(false);
-    const [products, setProducts] = useState([]);
-    const navigate = useNavigate();
 
-    let width = screenSize.screenWidth > smallScreenWidth ? '220px' : '180px'
-    let withLateralMenu = screenSize.screenWidth > smallScreenWidth ? false : true
+    const [ecologicalCategories, setEcologicalCategories] = useState()
 
 
-    if (screenSize.screenWidth > smallScreenWidth && screenSize.screenWidth <= mediumScreenWidth) {
-        width = '170px'
-    }
+    const categoriesListRef = useRef(null);
+    const [isDown, setIsDown] = useState(false);
+    const [startX, setStartX] = useState(0);
+    const [scrollLeft, setScrollLeft] = useState(0);
 
-    async function loadAllProducts() {
-        try {
+    const handleMouseDown = (e) => {
+        setIsDown(true);
+        setStartX(e.pageX - categoriesListRef.current.offsetLeft);
+        setScrollLeft(categoriesListRef.current.scrollLeft);
+    };
+
+    const handleMouseLeave = () => {
+        setIsDown(false);
+    };
+
+    const handleMouseUp = () => {
+        setIsDown(false);
+    };
+
+    const handleMouseMove = (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - categoriesListRef.current.offsetLeft;
+        const walk = (x - startX) * 2; // Velocidad del desplazamiento
+        categoriesListRef.current.scrollLeft = scrollLeft - walk;
+    };
+
+    const [products, setProducts] = useState([]); // Agregar esta línea
+
+    const getTopDiscountProducts = () => {
+        const sortedProducts = [...products].sort((a, b) => b.discount - a.discount);
+        return sortedProducts.slice(0, 4);
+    };
+    
+
+    useEffect(() => { // Agregar esta función useEffect
+        async function loadEcologicalCategories() {
+            try {
+                const res = await getAllEcologicalCategories();
+                setEcologicalCategories(res);
+    
+            } catch (error) {
+                console.error("Error al cargar categorías ecológicas:", error);
+            }
+        }
+
+        async function loadProducts() {
+          try {
             const res = await getAllProducts();
             setProducts(res.data);
-            console.log(res.data)
-
-        } catch (error) {
-            console.error("Error al cargar categorías ecológicas:", error);
+            console.log(res);
+          } catch (error) {
+            console.error("Error al cargar productos:", error);
+          }
         }
-    }
-
-    async function loadProductsByCategories(idCategory) {
-        try {
-            const res = await getProductsByCategory(idCategory);
-            setProducts(res.data);
-        } catch (error) {
-            console.error("Error al cargar categorías ecológicas:", error);
-        }
-    }
+        loadProducts();
+        loadEcologicalCategories()
+      }, []);
 
 
-    async function loadProductsByEcologicalCategories(idCategory) {
-        try {
-            const res = await getProductsByEcologicalCategory(idCategory);
-            setProducts(res.data);
-        } catch (error) {
-            console.error("Error al cargar categorías ecológicas:", error);
-        }
-    }
-
-    async function loadProductsByGenderCategories(idCategory) {
-        try {
-            const res = await getProductsByGenderCategory(idCategory);
-            setProducts(res.data);
-            console.log(res.data)
-        } catch (error) {
-            console.error("Error al cargar categorías ecológicas:", error);
-        }
-    }
-
-    const toggleLateralMenu = () => {
-        setIsLateralMenuOpen(!isLateralMenuOpen);
-    };
-
-
-
+    /*
     useEffect(() => {
-        addCategory(categoryType, { id: categoryId, name: categoryName });
 
-    }, [categoryType, categoryId, categoryName]);
+        loadEcologicalCategories()
 
-    const handleDeleteCategory = (type, id) => {
-        const areAllCategoriesEmpty = deleteCategory(type, id);
-        if (areAllCategoriesEmpty) {
-            navigate('/products')
-            loadAllProducts()
-        }
-    };
-
-
-    useEffect(() => {
-        if (categories.length > 0) {
-            loadProductsByCategories(categories[0].id)
-        }
-        if (ecologicalCategories.length > 0) {
-            loadProductsByEcologicalCategories(ecologicalCategories[0].id)
-        }
-        if (genderCategories.length > 0) {
-            loadProductsByGenderCategories(genderCategories[0].id)
-        }
-
-
-    }, [categories, ecologicalCategories, genderCategories]);
-
+    }, [])
+    */
 
     return (
         <div>
-            <SecondaryMenu toggleLateralMenu={toggleLateralMenu} withLateralMenu={withLateralMenu} />
-            <div className='container'>
-                {screenSize.screenWidth > smallScreenWidth
-                    ? <LateralMenu withLateralMenu={false} />
-                    : undefined}
-
-                {isLateralMenuOpen ? <LateralMenu
-                    toggleLateralMenu={toggleLateralMenu} withLateralMenu={true}
-
-                /> : undefined}
-
-                <div className='search-products-content'>
-                    <div className='filters-by-category-container'>
-                        {categories.map((category, index) => (
-                            <div key={index} className='category-container'>
-                                <p className='filter-category-name'>{category.name}</p>
-                                <button className='close-Button' onClick={() => handleDeleteCategory('category', category.id)}>
-                                    <IoClose />
-                                </button>
-                            </div>
-                        ))}
-                        {ecologicalCategories.map((category, index) => (
-                            <div key={index} className='category-container'>
-                                <p className='filter-category-name'>{category.name}</p>
-                                <button className='close-Button' onClick={() => handleDeleteCategory('ecological', category.id)}>
-                                    <IoClose />
-                                </button>
-                            </div>
-                        ))}
-                        {genderCategories.map((category, index) => (
-                            <div key={index} className='category-container'>
-                                <p className='filter-category-name'>{category.name}</p>
-                                <button className='close-Button' onClick={() => handleDeleteCategory('gender', category.id)}>
-                                    <IoClose />
-                                </button>
-                            </div>
-                        ))}
+            <div className='products-content'>
+                <div className='products-content-container'>
+                
+                
+                    <div className='phrase-container'>
+                        <p className='phrase'> English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover</p>
+                        <p className='phrase-autor'>Autor</p>
                     </div>
-                    <div className='filtered-products-list'>
-                        {products.map((product, index) => (
-                            <div key={index} className='individual-product'>
-                                <IndividualProduct 
-                                width={width} 
-                                hoverWidth={width} 
-                                name = { product.name } 
-                                description = { product.description }
-                                price = { product.price } 
-                                discount={ product.discount }
-                                
-                                />
-                            </div>
-                        ))}
+                    <div className='products-content'>
+                        <h3>All products</h3>
+                        
+                        <div className="product-list" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
+                            {products.slice(-8).map((product, index) => (
+                                <div key={index} className="individual-product">
+                                    <IndividualProduct products={product} />
+                                </div>
+                            ))}
+                        </div>
+                        <div className='products-store-button'>
+                            <GlobalLinkContainer name="Open store" color={colorPinkLight} hoverColor={colorPink}/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -170,5 +121,3 @@ function Products() {
 }
 
 export default Products;
-
-

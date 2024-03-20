@@ -1,5 +1,5 @@
 from rest_framework import viewsets, filters
-from .serializer import EcologicalCategorySerializer, CategorySerializer, GenderCategoriesSerializer, ProductSerializer
+from .serializer import *
 from .models import *
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -11,6 +11,7 @@ from django.db.models import Q
 class EcologicalCategoriesView(viewsets.ModelViewSet):
     serializer_class = EcologicalCategorySerializer
     queryset = EcologicalCategories.objects.all()
+    
 
 class CategoriesViews(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
@@ -39,6 +40,41 @@ class ProductView(viewsets.ModelViewSet):
                 Q(description__icontains=search_query)
             )
         return queryset
+
+
+class ProductCategoriesViews(viewsets.ModelViewSet):
+    serializer_class = ProductCategoriesSerializer
+    queryset = ProductCategories.objects.all()
+
+class ProductEcologicalCategoriesViews(viewsets.ModelViewSet):
+    serializer_class = ProductEcologicalCategoriesSerializer
+    queryset = ProductEcologicalCategories.objects.all()
+
+class ProductGenderCategoriesViews(viewsets.ModelViewSet):
+    serializer_class = ProductGenderCategoriesSerializer
+    queryset = ProductGenderCategories.objects.all()
+
+class ProductGeneralSizesViews(viewsets.ModelViewSet):
+    serializer_class = ProductGeneralSizesSerializer
+    queryset = ProductGeneralSizes.objects.all()
+
+class ProductShoesSizesUSViews(viewsets.ModelViewSet):
+    serializer_class = ProductShoesSizesUSSerializer
+    queryset = ProductShoesSizesUS.objects.all()
+
+class ProductBrasSizesViews(viewsets.ModelViewSet):
+    serializer_class = ProductBrasSizesUSSerializer
+    queryset = ProductBrasSizes.objects.all()
+
+class ProductPantsSizesViews(viewsets.ModelViewSet):
+    serializer_class = ProductPantsSizesSerializer
+    queryset = ProductPantsSizes.objects.all()
+
+class ProductImagesViews(viewsets.ModelViewSet):
+    serializer_class = ProductImagesSerializer
+    queryset = ProductImages.objects.all()
+
+
 
 
 

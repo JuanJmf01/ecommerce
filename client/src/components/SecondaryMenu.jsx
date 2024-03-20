@@ -21,8 +21,8 @@ function SecondaryMenu({ toggleLateralMenu, withLateralMenu }) {
 
       </button> : undefined}
       <ul className='items'>
-        <li><a href="/servicio_cliente">Servicio al cliente</a></li>
-        <li><a href="/vender">Vender</a></li>
+        <li><a href="/products">Ver productos</a></li>
+        <li><a href="/products-create">Vender</a></li>
       </ul>
     </div>
   );
